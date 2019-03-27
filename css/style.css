@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+/* 
+color: #f2cbbc
+background: #334431
+scolor: #e05038
+tcolor: #e6af4b
+
+*/
+
+* {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  background: #334431;
+  color: #f2cbbc;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.active {
+  color: #fff;
+}
+
+.txt-act {
+  text-transform: capitalize;
+}
+.b {
+  border: 2px solid #e6af4b;
+  border-radius: 5px;
+}
+
+.header {
+  color: #f2cbbc;
+  border-bottom: 2px solid #f2cbbc;
+  width: max-content;
+  margin: 0 auto;
+  text-align: center;
+}
+.header-title {
+  margin: 0;
+  font-size: 3.5rem;
+}
+.nav-list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-list li {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.main-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#mainframe {
+  background: url(../img/5.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: auto;
+}
+.window-game {
+  display: flex;
+  height: 25rem;
+  width: 38rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.input {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  background: #f2cbbc;
+  color: #334431;
+  padding: 1rem 2rem;
+}
+
+.footer {
+  display: none;
+  align-items: center;
+  margin-top: auto;
+  background: #f2cbbc;
+  color: #334431;
+  height: 2rem;
+}
+.footer-content {
+  margin: 0 2rem;
+}
+.btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #e6af4b;
+  transition: all 0.4s ease-out;
+}
+.btn:hover {
+  background: #e6af4b;
+  color: #334431;
+  transition: all 0.5s ease-out;
+}
+
+@media only screen and (max-width: 768px) {
+  .header-title {
+    font-size: 2rem;
+  }
+  .form-header {
+    font-size: 1.2rem;
+    text-transform: none;
+  }
+  .window-game {
+    height: 20rem;
+    width: 28rem;
+  }
+  .input {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
