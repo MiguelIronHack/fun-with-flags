@@ -21,8 +21,12 @@ body {
   background: #334431;
   color: #f2cbbc;
   font-family: 'Titillium Web', sans-serif;
+  letter-spacing: 0.15em;
 }
-
+a {
+  text-decoration: none;
+  color: #f2cbbc;
+}
 .active {
   color: #fff;
 }
@@ -34,6 +38,8 @@ body {
   border: 2px solid #e6af4b;
   border-radius: 5px;
 }
+
+/* header */
 
 .header {
   color: #f2cbbc;
@@ -57,6 +63,9 @@ body {
   margin: 1rem;
   padding: 0.5rem 1rem;
 }
+/* */
+
+/* mainframe */
 
 .main-form {
   display: flex;
@@ -65,7 +74,7 @@ body {
   align-items: center;
 }
 #mainframe {
-  background: url(../img/5.png);
+  background: url(../img/portugal.png);
   background-repeat: no-repeat;
   background-size: cover;
   margin: auto;
@@ -86,6 +95,86 @@ body {
   color: #334431;
   padding: 1rem 2rem;
 }
+/*  */
+
+/* New Player */
+
+.input-player-name-header {
+  overflow: hidden;
+  border-right: 0.15em solid #e6af4b;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  background: transparent;
+  font-size: 1rem;
+  color: #fff;
+  max-width: max-content;
+}
+
+.input-div {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+.input-player-name {
+  display: flex;
+  color: #f2cbbc;
+  padding: 0.5rem 2.5rem;
+  font-size: 1rem;
+  border: 1px solid #e6af4b;
+  border-radius: 5px;
+  background: transparent;
+}
+.input-player-name::placeholder {
+  display: flex;
+  justify-content: center;
+  color: #f2cbbc;
+}
+
+/* Players */
+.table {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+}
+.table-content,
+.table-header {
+  display: grid;
+  grid-template-columns: 20vw 20vw;
+  justify-content: space-around;
+  width: 80vw;
+  border-bottom: 1px solid #e6af4b;
+}
+.table-content > *,
+.table-header > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #e6af4b;
+  }
+}
+
+/**/
+/*  */
 
 .footer {
   display: none;

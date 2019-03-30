@@ -1,39 +1,64 @@
-/* Fun With Flags */
-
-document.getElementById('btn').addEventListener('click', a => {
-  let result = 'no';
-  let userAnswer = document.getElementById('input');
-
-  let mainframe = document.getElementById('mainframe');
-
-  userAnswer.value == 'china' ? (result = 'yes') : (result = 'no');
-  let random = Math.floor(Math.random() * 10);
-  // random background
-  let mainBg = `url(../img/${random}.png) no-repeat`;
-  // After Answer
-
-  if (result === 'yes') {
-    let correctA;
-    let bgChange = mainframe.style;
-    function correctAnswerBg() {
-      bgChange.background = window.setTimeout(
-        (bgChange.background = mainBg),
-        1000
-      );
-      bgChange.backgroundSize = 'cover';
-      correctA = window.setTimeout(window.alert, 10, 'Correct!');
-    }
-    window.onload = correctAnswerBg();
+class Player {
+  constructor(name, score) {
+    this.name = name;
+    this.score = score;
   }
-});
+  static player() {}
+}
+// UI
+class UI {
+  static displayPlayer() {
+    const PlayerInGame = [
+      {
+        name: 'John'
+      }
+    ];
 
-//mainframe.style.display = 'none';
-//userAnswer.style.display = 'none';
-//userBtn.style.display = 'none';
+    const player = PlayerInGame;
 
-//mainframe.addEventListener('click', e => (e.style.display = 'flex'));
+    // New Player
+    player.forEach(p => UI.addNewPlayer(p));
+  }
 
-mainframe.addEventListener('click', function(e) {
-  mainframe.style.visibility = 'visible';
-  let userInput = e.target.value;
-});
+  static addNewPlayer(p) {
+    const PlayerList = document.getElementById('player-list');
+  }
+}
+// Remove input
+//
+/* Main Frame */
+document.getElementById('mainframe').parentElement.remove();
+/*  */
+/*  Name Input */
+//document.getElementById('input-name').parentElement.parentElement.remove();
+function getName(e) {
+  e.preventDefault();
+  console.log(e.target.value);
+}
+
+const nameInput = document.getElementById('input-name');
+
+nameInput.onkeyup = getName;
+
+//nameInput.onkeydown =
+
+// const newPlayer = () => {
+//   document.getElementById('input-name').addEventListener('submit', e => {
+//     // prevent default submit
+//     e.preventDefault();
+//     // get form values
+//     const name = document.getElementById('name').value;
+//     const score = document.getElementById('score').value;
+
+//     // create new item
+//     const player = new Player(name, score);
+//     // Add item
+//     UI.addNewPlayer(player);
+//     // clear fields
+//     UI.clearFields();
+//   });
+// };
+
+/*  */
+/* Players  */
+document.getElementById('player-section').remove();
