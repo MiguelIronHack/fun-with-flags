@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./js/index.js" type="module"></script>
     <script src="./js/errorHandling.js "></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
+      integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
+      crossorigin="anonymous"
+    ></script>
+
     <title>Fun With Flags</title>
   </head>
   <body>
@@ -34,7 +41,7 @@
       </nav>
 
       <!-- Page 1 -->
-      <form class="player-name">
+      <div class="player-name">
         <h4 class="input-player-name-header">input your name please</h4>
         <div class="input-div">
           <input
@@ -45,10 +52,14 @@
             autocomplete="off"
             minlength="2"
             maxlength="15"
+            onsubmit="getName()"
             required
           />
+          <button id="name-btn" class="btn btn-submit" type="submit">
+            <i class="fas fa-play"></i>
+          </button>
         </div>
-      </form>
+      </div>
       <!-- Page 2 -->
       <section id="game-frame" class="main-form">
         <div id="mainframe" class="window-game b"></div>

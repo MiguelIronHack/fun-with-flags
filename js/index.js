@@ -31,14 +31,21 @@ document.getElementById('mainframe').parentElement.remove();
 /*  */
 /*  Name Input */
 //document.getElementById('input-name').parentElement.parentElement.remove();
+
 function getName(e) {
-  e.preventDefault();
-  console.log(e.target.value);
+  let userName = [];
+  const nameInput = document.getElementById('input-name');
+
+  // throw error if name is too small
+  if (!nameInput.value) {
+    alert('The name should have at least one character');
+  } else {
+    userName.push(nameInput.value);
+  }
+
+  console.log(userName);
 }
-
-const nameInput = document.getElementById('input-name');
-
-nameInput.onkeyup = getName;
+document.getElementById('name-btn').onclick = getName;
 
 //nameInput.onkeydown =
 

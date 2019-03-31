@@ -34,9 +34,28 @@ a {
 .txt-act {
   text-transform: capitalize;
 }
+
 .b {
   border: 2px solid #e6af4b;
   border-radius: 5px;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: #e6af4b;
+  transition: all 0.4s ease-out;
+  border-radius: 15px;
+}
+.btn:hover {
+  background: #e6af4b;
+  color: #334431;
+  transition: all 0.5s ease-out;
+}
+.btn-submit {
+  margin-top: 1rem;
+  height: 3rem;
+  width: 6rem;
 }
 
 /* header */
@@ -45,7 +64,7 @@ a {
   color: #f2cbbc;
   border-bottom: 2px solid #f2cbbc;
   width: max-content;
-  margin: 0 auto;
+  margin: 1rem auto;
   text-align: center;
 }
 .header-title {
@@ -57,6 +76,7 @@ a {
   justify-content: center;
   list-style: none;
   padding: 0;
+  margin-bottom: 3rem;
 }
 
 .nav-list li {
@@ -113,7 +133,9 @@ a {
 
 .input-div {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 1rem;
 }
 .input-player-name {
@@ -124,6 +146,7 @@ a {
   border: 1px solid #e6af4b;
   border-radius: 5px;
   background: transparent;
+  text-align: center;
 }
 .input-player-name::placeholder {
   display: flex;
@@ -187,19 +210,6 @@ a {
 .footer-content {
   margin: 0 2rem;
 }
-.btn {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  color: #e6af4b;
-  transition: all 0.4s ease-out;
-}
-.btn:hover {
-  background: #e6af4b;
-  color: #334431;
-  transition: all 0.5s ease-out;
-}
-
 @media only screen and (max-width: 768px) {
   .header-title {
     font-size: 2rem;
