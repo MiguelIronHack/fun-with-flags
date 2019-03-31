@@ -26,7 +26,7 @@
       <nav class="navbar">
         <ul class="nav-list">
           <li>
-            <a class="active" href="./index.html">home</a>
+            <a class="active" href="./index.html">Play</a>
           </li>
           <li>
             <a href="./game.html">game</a>
@@ -41,7 +41,7 @@
       </nav>
 
       <!-- Page 1 -->
-      <div class="player-name">
+      <div id="player-name" class="player-name">
         <h4 class="input-player-name-header">input your name please</h4>
         <div class="input-div">
           <input
@@ -67,16 +67,14 @@
           This is the country flag of...
         </h2>
         <input
-          id="input"
+          id="flag-input"
           class="input b"
           type="text"
-          oninvalid="invalid(this);"
-          oninput="invalid(this);"
           placeholder="ex: Ecuador"
           autocomplete="off"
           required
         />
-        <button id="btn" class="b btn" type="button">submit</button>
+        <button id="submit-answer" class="b btn" type="button">submit</button>
       </section>
     </main>
     <!-- Page 3 -->

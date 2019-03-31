@@ -3,68 +3,75 @@ class Player {
     this.name = name;
     this.score = score;
   }
-  static player() {}
 }
 // UI
-class UI {
-  static displayPlayer() {
-    const PlayerInGame = [
-      {
-        name: 'John'
-      }
-    ];
+// class UI {
+//   static displayPlayer() {
+//     const PlayerInGame = [
+//       {
+//         name: 'John'
+//       }
+//     ];
 
-    const player = PlayerInGame;
+//     const player = PlayerInGame;
 
-    // New Player
-    player.forEach(p => UI.addNewPlayer(p));
-  }
+//     // New Player
+//     player.forEach(p => UI.addNewPlayer(p));
+//   }
 
-  static addNewPlayer(p) {
-    const PlayerList = document.getElementById('player-list');
-  }
-}
+//   static addNewPlayer(p) {
+//     const PlayerList = document.getElementById('player-list');
+//   }
+// }
 // Remove input
 //
-/* Main Frame */
-document.getElementById('mainframe').parentElement.remove();
-/*  */
-/*  Name Input */
+
+//////////////////////////////////////
+///////////*  Name Input *///////////
+////////////////////////////////////
 //document.getElementById('input-name').parentElement.parentElement.remove();
-
-function getName(e) {
-  let userName = [];
+var userName = [];
+const getName = () => {
   const nameInput = document.getElementById('input-name');
+  /* players array */
 
+  document.getElementById('name-btn').onclick = getName;
   // throw error if name is too small
   if (!nameInput.value) {
     alert('The name should have at least one character');
   } else {
-    userName.push(nameInput.value);
+    let player = new Player(nameInput.value, 0);
+    userName.push(player);
+    /* open mainframe */
+    document.getElementById('mainframe').parentElement.style.display = 'flex';
+    /* hide name input */
+    nameInput.parentElement.parentElement.style.display = 'none';
   }
-
   console.log(userName);
-}
+};
 document.getElementById('name-btn').onclick = getName;
+////////////////////////////////////
+//////////* Main Frame *///////////
+//////////////////////////////////
 
-//nameInput.onkeydown =
-
-// const newPlayer = () => {
-//   document.getElementById('input-name').addEventListener('submit', e => {
-//     // prevent default submit
-//     e.preventDefault();
-//     // get form values
-//     const name = document.getElementById('name').value;
-//     const score = document.getElementById('score').value;
-
-//     // create new item
-//     const player = new Player(name, score);
-//     // Add item
-//     UI.addNewPlayer(player);
-//     // clear fields
-//     UI.clearFields();
-//   });
-// };
+////////////// Flag ////////////
+const flag = document.getElementById('mainframe');
+flag.style.background = 'url(../img/portugal.png) no-repeat';
+flag.style.backgroundSize = 'cover';
+///////////////////////////////////////
+document
+  .getElementById('submit-answer')
+  .addEventListener('click', function answer() {
+    const answer = document.getElementById('flag-input').value;
+    //console.log(answer);
+    const flagName = (document.getElementById(
+      'mainframe'
+    ).style.backgroundImage = '../img/china.png');
+    console.log(flagName.valueOf(flagName));
+  });
+////////////////////////////////////////
+document.getElementById('player-name').style.display = 'none';
+/*  */
 
 /*  */
 /* Players  */

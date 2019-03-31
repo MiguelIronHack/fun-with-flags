@@ -93,12 +93,7 @@ a {
   justify-content: center;
   align-items: center;
 }
-#mainframe {
-  background: url(../img/portugal.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: auto;
-}
+
 .window-game {
   display: flex;
   height: 25rem;
@@ -110,7 +105,7 @@ a {
 .input {
   text-align: center;
   font-size: 1.5rem;
-  margin-top: 1rem;
+  margin: 1rem 0;
   background: #f2cbbc;
   color: #334431;
   padding: 1rem 2rem;
