@@ -29,7 +29,7 @@ class Player {
 //////////////////////////////////////
 ///////////*  Name Input *///////////
 ////////////////////////////////////
-//document.getElementById('input-name').parentElement.parentElement.remove();
+
 var userName = [];
 const getName = () => {
   const nameInput = document.getElementById('input-name');
@@ -37,8 +37,13 @@ const getName = () => {
 
   document.getElementById('name-btn').onclick = getName;
   // throw error if name is too small
-  if (!nameInput.value) {
-    alert('The name should have at least one character');
+  if (nameInput.value.length < 2) {
+    const error = document.getElementById('name-error');
+    error.style.display = 'flex';
+
+    document.getElementById('close-error').onclick = function(e) {
+      error.style.display = 'none';
+    };
   } else {
     let player = new Player(nameInput.value, 0);
     userName.push(player);
@@ -54,23 +59,68 @@ document.getElementById('name-btn').onclick = getName;
 //////////* Main Frame *///////////
 //////////////////////////////////
 
-////////////// Flag ////////////
-const flag = document.getElementById('mainframe');
-flag.style.background = 'url(../img/portugal.png) no-repeat';
-flag.style.backgroundSize = 'cover';
-///////////////////////////////////////
-document
-  .getElementById('submit-answer')
-  .addEventListener('click', function answer() {
-    const answer = document.getElementById('flag-input').value;
-    //console.log(answer);
-    const flagName = (document.getElementById(
-      'mainframe'
-    ).style.backgroundImage = '../img/china.png');
-    console.log(flagName.valueOf(flagName));
+////////////// Flags ////////////
+//const china = document.getElementById('china');
+
+////////////////////////////////
+///////////*  AJAX *///////////
+//////////////////////////////
+
+const mainframe = document.getElementById('mainframe');
+const url = 'https://restcountries.eu/rest/v2/all';
+
+function displayFlag(flagList) {
+  console.log('display', flagList);
+  flagList.forEach(flag => {
+    const img = document.createElement('img');
+    img.alt = `${flag.name}`;
+    img.src = `${flag.flag}`;
+    mainframe.appendChild(img);
+    //console.log(flag.name);
   });
+}
+
+function getFlags() {
+  console.log(axios);
+  axios
+    .get(url)
+    .then(res => {
+      displayFlag(res.data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
+const submit = document.getElementById('submit-answer');
+submit.onclick = getFlags;
+
+////////////////////////////////////////
+
+////////////////////////////////////
+////////////////////////////////////
+
+if (china.style.display !== 'none') {
+  document
+    .getElementById('submit-answer')
+    .addEventListener('click', function answer() {
+      const answer = document.getElementById('flag-input').value;
+      console.log(answer);
+
+      console.log(china.alt.toLowerCase());
+
+      if (answer.toLowerCase() === china.alt.toLowerCase()) {
+        alert('correct!');
+        china.style.display = 'none';
+        france.style.display = 'flex';
+      }
+    });
+}
+
 ////////////////////////////////////////
 document.getElementById('player-name').style.display = 'none';
+//document.getElementById('game-frame').style.display = 'none';
+
 /*  */
 
 /*  */

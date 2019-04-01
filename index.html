@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./css/style.css" />
-    <script src="./js/index.js" type="module"></script>
-    <script src="./js/errorHandling.js "></script>
     <script
       defer
       src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
       integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
       crossorigin="anonymous"
     ></script>
-
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="./js/index.js" type="module"></script>
+    <script src="./js/errorHandling.js "></script>
     <title>Fun With Flags</title>
   </head>
   <body>
@@ -60,9 +60,17 @@
           </button>
         </div>
       </div>
+      <div class="error" id="name-error">
+        <div class="modal-content">
+          The name should have at least two letters
+        </div>
+        <button class="btn" id="close-error">x</button>
+      </div>
       <!-- Page 2 -->
       <section id="game-frame" class="main-form">
-        <div id="mainframe" class="window-game b"></div>
+        <div id="mainframe" class="window-game b">
+          <img id="china" src="./img/china.png" alt="China" />
+        </div>
         <h2 class="form-header">
           This is the country flag of...
         </h2>
