@@ -23,6 +23,10 @@ body {
   font-family: 'Titillium Web', sans-serif;
   letter-spacing: 0.15em;
 }
+
+.d-0 {
+  display: none;
+}
 /* error modal */
 .error {
   display: none;
@@ -123,6 +127,9 @@ a {
   justify-content: center;
   align-items: center;
 }
+.window-game > * {
+  height: 24rem;
+}
 
 .input {
   text-align: center;
@@ -141,7 +148,7 @@ a {
   border-right: 0.15em solid #e6af4b;
   white-space: nowrap;
   margin: 0 auto;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation: typing 3.5s steps(50, end), cursor 1.75s step-end infinite;
   background: transparent;
   font-size: 1rem;
   color: #fff;
@@ -203,7 +210,7 @@ a {
 }
 
 /* The typewriter cursor effect */
-@keyframes blink-caret {
+@keyframes cursor {
   from,
   to {
     border-color: transparent;

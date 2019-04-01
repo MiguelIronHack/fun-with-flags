@@ -1,30 +1,13 @@
+//////////////////////////////
+//*  Function Constructor *//
+/////////////////////////////
+
 class Player {
   constructor(name, score) {
     this.name = name;
     this.score = score;
   }
 }
-// UI
-// class UI {
-//   static displayPlayer() {
-//     const PlayerInGame = [
-//       {
-//         name: 'John'
-//       }
-//     ];
-
-//     const player = PlayerInGame;
-
-//     // New Player
-//     player.forEach(p => UI.addNewPlayer(p));
-//   }
-
-//   static addNewPlayer(p) {
-//     const PlayerList = document.getElementById('player-list');
-//   }
-// }
-// Remove input
-//
 
 //////////////////////////////////////
 ///////////*  Name Input *///////////
@@ -55,12 +38,10 @@ const getName = () => {
   console.log(userName);
 };
 document.getElementById('name-btn').onclick = getName;
-////////////////////////////////////
-//////////* Main Frame *///////////
-//////////////////////////////////
 
-////////////// Flags ////////////
-//const china = document.getElementById('china');
+/////////////////////////////////////////////////////
+/////////////////////* Main Frame */////////////////
+///////////////////////////////////////////////////
 
 ////////////////////////////////
 ///////////*  AJAX *///////////
@@ -70,18 +51,41 @@ const mainframe = document.getElementById('mainframe');
 const url = 'https://restcountries.eu/rest/v2/all';
 
 function displayFlag(flagList) {
-  console.log('display', flagList);
+  //console.log('Country List', flagList);
+
   flagList.forEach(flag => {
+    flags.push(flag);
+    ////////////////////////////////////////
+    ////////////* Add images  *////////////
     const img = document.createElement('img');
+    img.classList.add('d-0');
+    img.id = `${flag.numericCode}`;
     img.alt = `${flag.name}`;
     img.src = `${flag.flag}`;
     mainframe.appendChild(img);
-    //console.log(flag.name);
+    /////////////////////////////////////
   });
+
+  const randomFlag = Math.floor(Math.random() * 250);
+
+  currentFlagName.push(flagList[randomFlag].name);
+  currentFlagName.push(flagList[randomFlag].numericCode);
+
+  console.log(currentFlagName[1]);
+
+  console.log(document.getElementById(`${currentFlagName[1]}`));
+
+  if (
+    document.getElementById(`${currentFlagName[1]}`).id == currentFlagName[1]
+  ) {
+    document.getElementById(`${currentFlagName[1]}`).classList.toggle('d-0');
+  }
 }
 
+//////////// Current Flag ////////////
+const currentFlagName = [];
+
 function getFlags() {
-  console.log(axios);
   axios
     .get(url)
     .then(res => {
@@ -91,35 +95,39 @@ function getFlags() {
       console.error(err);
     });
 }
+// all the flags
+const flags = [];
 
+///////////////////////////////////////////
 const submit = document.getElementById('submit-answer');
-submit.onclick = getFlags;
+window.onload = getFlags;
 
 ////////////////////////////////////////
 
 ////////////////////////////////////
 ////////////////////////////////////
 
-if (china.style.display !== 'none') {
-  document
-    .getElementById('submit-answer')
-    .addEventListener('click', function answer() {
-      const answer = document.getElementById('flag-input').value;
-      console.log(answer);
+// if (china.style.display !== 'none') {
+//   document
+//     .getElementById('submit-answer')
+//     .addEventListener('click', function answer() {
+const answer = document.getElementById('flag-input').value;
+console.log(answer);
+//       console.log(answer);
 
-      console.log(china.alt.toLowerCase());
+//       console.log(china.alt.toLowerCase());
 
-      if (answer.toLowerCase() === china.alt.toLowerCase()) {
-        alert('correct!');
-        china.style.display = 'none';
-        france.style.display = 'flex';
-      }
-    });
-}
+//       if (answer.toLowerCase() === china.alt.toLowerCase()) {
+//         alert('correct!');
+//         china.style.display = 'none';
+//         france.style.display = 'flex';
+//       }
+//     });
+// }
 
 ////////////////////////////////////////
-document.getElementById('player-name').style.display = 'none';
-//document.getElementById('game-frame').style.display = 'none';
+//document.getElementById('player-name').style.display = 'none';
+document.getElementById('game-frame').style.display = 'none';
 
 /*  */
 
