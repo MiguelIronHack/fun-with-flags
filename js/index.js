@@ -16,23 +16,24 @@ let player;
 
 let userName = [];
 const getName = () => {
+  /* Name input */
   const nameInput = document.getElementById('input-name');
-  /* players array */
+  /* show game tab */
+  const gameTab = document.getElementById('showGame');
 
   document.getElementById('name-btn').onclick = getName;
-  // throw error if name is too small
+  // throw error if the name is too small
   if (nameInput.value.length < 2) {
-    const error = document.getElementById('name-error');
-    error.style.display = 'flex';
-
-    document.getElementById('close-error').onclick = function() {
-      error.style.display = 'none';
-    };
+    error();
   } else {
     player = new Player(nameInput.value, 0);
     userName.push(player);
     document.getElementById('score-name').innerHTML = `${player.name}`;
     document.getElementById('score-score').innerHTML = `${player.score}`;
+
+    /* Change active nav */
+    document.getElementById('home').classList = '';
+    gameTab.classList = 'active';
 
     /* open mainframe */
     document.getElementById('mainframe').parentElement.style.display = 'flex';
@@ -40,12 +41,27 @@ const getName = () => {
     nameInput.parentElement.parentElement.style.display = 'none';
   }
   console.log(userName);
+
+  /* Use Nav */
+  userName.length < 1 ? showGame : error;
 };
 document.getElementById('name-btn').onclick = getName;
 
-/////////////////////////////////////////////////////
-/////////////////////* Main Frame */////////////////
-///////////////////////////////////////////////////
+//////////////////////////////////////
+///////////*  Name Error *///////////
+////////////////////////////////////
+function error() {
+  const error = document.getElementById('name-error');
+  error.style.display = 'flex';
+
+  document.getElementById('close-error').onclick = function() {
+    error.style.display = 'none';
+  };
+}
+
+///////////////////
+//* Main Frame *//
+/////////////////
 
 const url = 'https://restcountries.eu/rest/v2/all';
 
@@ -77,10 +93,6 @@ function startGame(flagList) {
   //////////// Get a random flag ///////////////
   /////////////////////////////////////////////
   function newFlag() {
-    // current flag name
-    let currentFlagNum = 0;
-    let currentFlagId = 1;
-
     const randomFlag = Math.floor(Math.random() * devSquad.length);
     currentFlagName.push(devSquad[randomFlag].name);
     currentFlagName.push(devSquad[randomFlag].numericCode);
@@ -106,13 +118,16 @@ function startGame(flagList) {
   }
   newFlag();
 
-  ///////////////
-  //* Answer *//
-  /////////////
+  //////////////////////
+  //* Answer Result *//
+  ////////////////////
 
   function result() {
     if (correctAnswer == 'Iran (Islamic Republic of)') {
       correctAnswer = 'iran';
+    }
+    if (correctAnswer == 'Viet Nam') {
+      correctAnswer = 'vietnam';
     }
     const userAnswer = document.getElementById('flag-input').value;
 
@@ -123,7 +138,7 @@ function startGame(flagList) {
       document.getElementById('mainframe').firstChild.remove();
       player.score += 30;
       document.getElementById('score-score').innerHTML = `${player.score}`;
-      alert('correct');
+      correct();
       newFlag();
     } else {
       // Incorrect answer
@@ -139,6 +154,17 @@ function startGame(flagList) {
 
   const submit = document.getElementById('submit-answer');
   submit.onclick = result;
+}
+
+////////////////////////////////
+//////*  Correct Answer *//////
+//////////////////////////////
+
+function correct() {
+  const success = document.getElementById('success');
+  success.style.display = 'flex';
+
+  setTimeout(() => (success.style.display = 'none'), 1000);
 }
 
 function getFlags() {
@@ -174,6 +200,11 @@ function showScore() {
   scoreList.style.justifyContent = 'center';
   playerName.style.display = 'none';
   gameFrame.style.display = 'none';
+
+  /* Change nav  */
+  document.getElementById('showGame').classList = '';
+  document.getElementById('home').classList = '';
+  document.getElementById('score-list').classList = 'active';
 }
 document.getElementById('score-list').onclick = showScore;
 
@@ -189,6 +220,30 @@ function showGame() {
   scoreList.style.display = 'none';
   playerName.style.display = 'none';
   gameFrame.style.display = 'flex';
+
+  /* Change nav  */
+  document.getElementById('score-list').classList = '';
+  document.getElementById('home').classList = '';
+  document.getElementById('showGame').classList = 'active';
 }
 
-document.getElementById('showGame').onclick = showGame;
+/////////////////////////////////////
+///////////*  Show Home *///////////
+///////////////////////////////////
+
+function showHome() {
+  const scoreList = document.getElementById('player-section');
+  const playerName = document.getElementById('player-name');
+  const gameFrame = document.getElementById('game-frame');
+
+  scoreList.style.display = 'none';
+  playerName.style.display = 'block';
+  gameFrame.style.display = 'none';
+
+  /* Change nav  */
+  document.getElementById('score-list').classList = '';
+  document.getElementById('home').classList = 'active';
+  document.getElementById('showGame').classList = '';
+}
+
+document.getElementById('home').onclick = showHome;

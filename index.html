@@ -18,7 +18,7 @@
   </head>
   <body>
     <header class="header txt-act">
-      <h1 class="header-title">no fun with flags</h1>
+      <h1 class="header-title">fun with flags</h1>
     </header>
 
     <!-- Nav -->
@@ -26,7 +26,7 @@
       <nav class="navbar">
         <ul class="nav-list">
           <li>
-            <a class="active" href="./index.html">home</a>
+            <a id="home" class="active" href="#home">home</a>
           </li>
           <li>
             <a id="showGame" href="#game">game</a>
@@ -35,7 +35,7 @@
             <a id="score-list" href="#score">score</a>
           </li>
           <li>
-            <a href="#about">about</a>
+            <a id="about" href="#about">about</a>
           </li>
         </ul>
       </nav>
@@ -56,11 +56,20 @@
           </button>
         </div>
       </div>
-      <div class="error" id="name-error">
+      <!-- Success -->
+      <div class="success modal" id="success">
+        <div class="success-content">
+          Correct!
+        </div>
+      </div>
+      <!-- Error -->
+      <div class="error modal" id="name-error">
         <div class="modal-content">
           The name should have at least two letters
         </div>
-        <button class="btn" id="close-error">x</button>
+        <button class="btn" id="close-error">
+          <i class="fas fa-times close-btn"></i>
+        </button>
       </div>
       <!-- Game Frame -->
       <section id="game-frame" class="main-form">
