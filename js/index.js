@@ -13,8 +13,8 @@ class Player {
 ///////////*  Name Input *///////////
 ////////////////////////////////////
 let player;
-
 let userName = [];
+
 const getName = () => {
   /* Name input */
   const nameInput = document.getElementById('input-name');
@@ -41,15 +41,12 @@ const getName = () => {
     nameInput.parentElement.parentElement.style.display = 'none';
   }
   console.log(userName);
-
-  /* Use Nav */
-  userName.length < 1 ? showGame : error;
 };
 document.getElementById('name-btn').onclick = getName;
 
-//////////////////////////////////////
-///////////*  Name Error *///////////
-////////////////////////////////////
+////////////////////
+//*  Name Error *//
+//////////////////
 function error() {
   const error = document.getElementById('name-error');
   error.style.display = 'flex';
@@ -59,13 +56,11 @@ function error() {
   };
 }
 
-///////////////////
-//* Main Frame *//
-/////////////////
+/////////////////////////
+/////* Main Frame */////
+///////////////////////
 
 const url = 'https://restcountries.eu/rest/v2/all';
-
-////////////////////////////////////
 let correctAnswer;
 //////////// Flag Vars ////////////
 const flags = [];
@@ -141,15 +136,16 @@ function startGame(flagList) {
       correct();
       newFlag();
     } else {
+      incorrect();
       // Incorrect answer
       currentFlagName.splice(0, 2);
       console.log(currentFlagName);
       document.getElementById('mainframe').firstChild.remove();
       devSquad.splice();
 
-      alert('Incorrect');
       newFlag();
     }
+    document.getElementById('flag-input').value = '';
   }
 
   const submit = document.getElementById('submit-answer');
@@ -167,6 +163,13 @@ function correct() {
   setTimeout(() => (success.style.display = 'none'), 1000);
 }
 
+function incorrect() {
+  const incorrect = document.getElementById('incorrect');
+  incorrect.style.display = 'flex';
+
+  setTimeout(() => (incorrect.style.display = 'none'), 1000);
+}
+
 function getFlags() {
   axios
     .get(url)
@@ -181,7 +184,6 @@ function getFlags() {
 ///////////////////////////////////////////
 window.onload = getFlags;
 
-//document.getElementById('player-name').style.display = 'none';
 document.getElementById('game-frame').style.display = 'none';
 
 /*  */
@@ -246,4 +248,24 @@ function showHome() {
   document.getElementById('showGame').classList = '';
 }
 
-document.getElementById('home').onclick = showHome;
+/* Use Nav */
+
+function setupNavMain(evt) {
+  console.log(this);
+  if (!userName.length) {
+    evt.preventDefault();
+  }
+
+  if (this.id == 'showGame') {
+    this.onclick = showGame;
+  } else if (this.id == 'home') {
+    this.onclick = showHome;
+  } else if (this.id == 'score-list') {
+    this.onclick = showScore;
+  }
+}
+
+const navLinks = document.querySelectorAll('.nav-list a');
+navLinks.forEach(link => {
+  link.onclick = setupNavMain;
+});
