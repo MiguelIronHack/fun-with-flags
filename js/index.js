@@ -1,3 +1,4 @@
+window.onload = getFlags;
 //////////////////////////////
 //*  Function Constructor *//
 /////////////////////////////
@@ -26,10 +27,20 @@ const getName = () => {
   if (nameInput.value.length < 2) {
     error();
   } else {
+    // Create new player
+
     player = new Player(nameInput.value, 0);
+
+    // Create new table row
+    const tableBody = document.getElementById('t-body');
+    tableBody.insertAdjacentHTML(
+      'beforeend',
+      `
+    <td>${player.name} </td>
+    <td id='${player.name}'>${player.score} </td>`
+    );
+
     userName.push(player);
-    document.getElementById('score-name').innerHTML = `${player.name}`;
-    document.getElementById('score-score').innerHTML = `${player.score}`;
 
     /* Change active nav */
     document.getElementById('home').classList = '';
@@ -62,8 +73,11 @@ function error() {
 
 const url = 'https://restcountries.eu/rest/v2/all';
 let correctAnswer;
+
 //////////// Flag Vars ////////////
 const flags = [];
+console.log(flags);
+
 const currentFlagName = [];
 
 function startGame(flagList) {
@@ -102,14 +116,13 @@ function startGame(flagList) {
     console.log(currentFlagName);
     //////// Correct Answer //////////
     correctAnswer = currentFlagName[0];
-    console.log(correctAnswer.toLowerCase().replace(/\W\s]/g));
+    correctAnswer.toLowerCase().replace(/\W\s]/g);
 
     if (
       document.getElementById(`${currentFlagName[1]}`).id == currentFlagName[1]
     ) {
       document.getElementById(`${currentFlagName[1]}`).classList.toggle('d-0');
     }
-    console.log(document.getElementById(`${currentFlagName[1]}`));
   }
   newFlag();
 
@@ -129,10 +142,20 @@ function startGame(flagList) {
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
       // Correct answer
       currentFlagName.splice(0, 2);
-      console.log(currentFlagName);
       document.getElementById('mainframe').firstChild.remove();
       player.score += 30;
-      document.getElementById('score-score').innerHTML = `${player.score}`;
+      document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
+      // remove correct answer from the array
+      // remove correct answer from the array
+      // remove correct answer from the array
+      const removeCorrectAnswerFromArray = devSquad[0]
+        .map(function(e) {
+          return e.name;
+        })
+        .indexOf(currentFlagName[0]);
+
+      devSquad.splice(removeCorrectAnswerFromArray, 1);
+      console.log(devSquad);
       correct();
       newFlag();
     } else {
@@ -170,6 +193,9 @@ function incorrect() {
   setTimeout(() => (incorrect.style.display = 'none'), 1000);
 }
 
+//////////////
+//*  AJAX *//
+////////////
 function getFlags() {
   axios
     .get(url)
@@ -182,18 +208,15 @@ function getFlags() {
 }
 
 ///////////////////////////////////////////
-window.onload = getFlags;
-
-document.getElementById('game-frame').style.display = 'none';
-
-/*  */
-/* Players  */
 
 document.getElementById('player-section').style.display = 'none';
+
+/* Players  */
 
 //////////////////////////////////////
 ///////////*  Show Score *///////////
 ////////////////////////////////////
+
 function showScore() {
   const scoreList = document.getElementById('player-section');
   const playerName = document.getElementById('player-name');
@@ -208,7 +231,6 @@ function showScore() {
   document.getElementById('home').classList = '';
   document.getElementById('score-list').classList = 'active';
 }
-document.getElementById('score-list').onclick = showScore;
 
 /////////////////////////////////////
 ///////////*  Show Game *///////////
@@ -251,12 +273,9 @@ function showHome() {
 /* Use Nav */
 
 function setupNavMain(evt) {
-  console.log(this);
   if (!userName.length) {
     evt.preventDefault();
-  }
-
-  if (this.id == 'showGame') {
+  } else if (this.id == 'showGame') {
     this.onclick = showGame;
   } else if (this.id == 'home') {
     this.onclick = showHome;
@@ -267,5 +286,5 @@ function setupNavMain(evt) {
 
 const navLinks = document.querySelectorAll('.nav-list a');
 navLinks.forEach(link => {
-  link.onclick = setupNavMain;
+  link.onmouseover = setupNavMain;
 });
