@@ -18,7 +18,7 @@
   </head>
   <body>
     <header class="header txt-act">
-      <h1 class="header-title">fun with flags</h1>
+      <h1 class="header-title">no fun with flags</h1>
     </header>
 
     <!-- Nav -->
@@ -26,13 +26,13 @@
       <nav class="navbar">
         <ul class="nav-list">
           <li>
-            <a class="active" href="./index.html">Play</a>
+            <a class="active" href="./index.html">home</a>
           </li>
           <li>
-            <a href="#game">game</a>
+            <a id="showGame" href="#game">game</a>
           </li>
           <li>
-            <a href="#score">score</a>
+            <a id="score-list" href="#score">score</a>
           </li>
           <li>
             <a href="#about">about</a>
@@ -50,10 +50,6 @@
             type="text"
             autofocus
             autocomplete="off"
-            minlength="2"
-            maxlength="15"
-            onsubmit="getName()"
-            required
           />
           <button id="name-btn" class="btn btn-submit" type="submit">
             <i class="fas fa-play"></i>
@@ -91,8 +87,8 @@
           <th>Score</th>
         </tr>
         <tr class="table-content" id="t-body">
-          <td id="name">John</td>
-          <td id="score">50</td>
+          <td id="score-name"></td>
+          <td id="score-score"></td>
         </tr>
       </table>
     </section>

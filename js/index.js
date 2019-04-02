@@ -12,8 +12,9 @@ class Player {
 //////////////////////////////////////
 ///////////*  Name Input *///////////
 ////////////////////////////////////
+let player;
 
-var userName = [];
+let userName = [];
 const getName = () => {
   const nameInput = document.getElementById('input-name');
   /* players array */
@@ -24,12 +25,15 @@ const getName = () => {
     const error = document.getElementById('name-error');
     error.style.display = 'flex';
 
-    document.getElementById('close-error').onclick = function(e) {
+    document.getElementById('close-error').onclick = function() {
       error.style.display = 'none';
     };
   } else {
-    let player = new Player(nameInput.value, 0);
+    player = new Player(nameInput.value, 0);
     userName.push(player);
+    document.getElementById('score-name').innerHTML = `${player.name}`;
+    document.getElementById('score-score').innerHTML = `${player.score}`;
+
     /* open mainframe */
     document.getElementById('mainframe').parentElement.style.display = 'flex';
     /* hide name input */
@@ -43,94 +47,148 @@ document.getElementById('name-btn').onclick = getName;
 /////////////////////* Main Frame */////////////////
 ///////////////////////////////////////////////////
 
-////////////////////////////////
-///////////*  AJAX *///////////
-//////////////////////////////
-
-const mainframe = document.getElementById('mainframe');
 const url = 'https://restcountries.eu/rest/v2/all';
 
-function displayFlag(flagList) {
-  //console.log('Country List', flagList);
+////////////////////////////////////
+let correctAnswer;
+//////////// Flag Vars ////////////
+const flags = [];
+const currentFlagName = [];
 
-  flagList.forEach(flag => {
-    flags.push(flag);
-    ////////////////////////////////////////
-    ////////////* Add images  *////////////
+function startGame(flagList) {
+  //* Current Flag Number *//
+
+  const devSquad = [
+    flagList[48],
+    flagList[77],
+    flagList[107],
+    flagList[231],
+    flagList[124],
+    flagList[208],
+    flagList[244],
+    flagList[219],
+    flagList[179],
+    flagList[239],
+    flagList[212]
+  ];
+
+  flags.push(devSquad);
+
+  //////////// Get a random flag ///////////////
+  /////////////////////////////////////////////
+  function newFlag() {
+    // current flag name
+    let currentFlagNum = 0;
+    let currentFlagId = 1;
+
+    const randomFlag = Math.floor(Math.random() * devSquad.length);
+    currentFlagName.push(devSquad[randomFlag].name);
+    currentFlagName.push(devSquad[randomFlag].numericCode);
+
     const img = document.createElement('img');
     img.classList.add('d-0');
-    img.id = `${flag.numericCode}`;
-    img.alt = `${flag.name}`;
-    img.src = `${flag.flag}`;
-    mainframe.appendChild(img);
-    /////////////////////////////////////
-  });
+    img.id = `${devSquad[randomFlag].numericCode}`;
+    img.alt = `${devSquad[randomFlag].name}`;
+    img.src = `${devSquad[randomFlag].flag}`;
+    document.getElementById('mainframe').appendChild(img);
 
-  const randomFlag = Math.floor(Math.random() * 250);
+    console.log(currentFlagName);
+    //////// Correct Answer //////////
+    correctAnswer = currentFlagName[0];
+    console.log(correctAnswer.toLowerCase().replace(/\W\s]/g));
 
-  currentFlagName.push(flagList[randomFlag].name);
-  currentFlagName.push(flagList[randomFlag].numericCode);
-
-  console.log(currentFlagName[1]);
-
-  console.log(document.getElementById(`${currentFlagName[1]}`));
-
-  if (
-    document.getElementById(`${currentFlagName[1]}`).id == currentFlagName[1]
-  ) {
-    document.getElementById(`${currentFlagName[1]}`).classList.toggle('d-0');
+    if (
+      document.getElementById(`${currentFlagName[1]}`).id == currentFlagName[1]
+    ) {
+      document.getElementById(`${currentFlagName[1]}`).classList.toggle('d-0');
+    }
+    console.log(document.getElementById(`${currentFlagName[1]}`));
   }
-}
+  newFlag();
 
-//////////// Current Flag ////////////
-const currentFlagName = [];
+  ///////////////
+  //* Answer *//
+  /////////////
+
+  function result() {
+    if (correctAnswer == 'Iran (Islamic Republic of)') {
+      correctAnswer = 'iran';
+    }
+    const userAnswer = document.getElementById('flag-input').value;
+
+    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+      // Correct answer
+      currentFlagName.splice(0, 2);
+      console.log(currentFlagName);
+      document.getElementById('mainframe').firstChild.remove();
+      player.score += 30;
+      document.getElementById('score-score').innerHTML = `${player.score}`;
+      alert('correct');
+      newFlag();
+    } else {
+      // Incorrect answer
+      currentFlagName.splice(0, 2);
+      console.log(currentFlagName);
+      document.getElementById('mainframe').firstChild.remove();
+      devSquad.splice();
+
+      alert('Incorrect');
+      newFlag();
+    }
+  }
+
+  const submit = document.getElementById('submit-answer');
+  submit.onclick = result;
+}
 
 function getFlags() {
   axios
     .get(url)
     .then(res => {
-      displayFlag(res.data);
+      startGame(res.data);
     })
     .catch(err => {
       console.error(err);
     });
 }
-// all the flags
-const flags = [];
 
 ///////////////////////////////////////////
-const submit = document.getElementById('submit-answer');
 window.onload = getFlags;
 
-////////////////////////////////////////
-
-////////////////////////////////////
-////////////////////////////////////
-
-// if (china.style.display !== 'none') {
-//   document
-//     .getElementById('submit-answer')
-//     .addEventListener('click', function answer() {
-const answer = document.getElementById('flag-input').value;
-console.log(answer);
-//       console.log(answer);
-
-//       console.log(china.alt.toLowerCase());
-
-//       if (answer.toLowerCase() === china.alt.toLowerCase()) {
-//         alert('correct!');
-//         china.style.display = 'none';
-//         france.style.display = 'flex';
-//       }
-//     });
-// }
-
-////////////////////////////////////////
 //document.getElementById('player-name').style.display = 'none';
 document.getElementById('game-frame').style.display = 'none';
 
 /*  */
-
-/*  */
 /* Players  */
-document.getElementById('player-section').remove();
+
+document.getElementById('player-section').style.display = 'none';
+
+//////////////////////////////////////
+///////////*  Show Score *///////////
+////////////////////////////////////
+function showScore() {
+  const scoreList = document.getElementById('player-section');
+  const playerName = document.getElementById('player-name');
+  const gameFrame = document.getElementById('game-frame');
+  scoreList.style.display = 'flex';
+  scoreList.style.justifyContent = 'center';
+  playerName.style.display = 'none';
+  gameFrame.style.display = 'none';
+}
+document.getElementById('score-list').onclick = showScore;
+
+/////////////////////////////////////
+///////////*  Show Game *///////////
+///////////////////////////////////
+
+function showGame() {
+  const scoreList = document.getElementById('player-section');
+  const playerName = document.getElementById('player-name');
+  const gameFrame = document.getElementById('game-frame');
+
+  scoreList.style.display = 'none';
+  playerName.style.display = 'none';
+  gameFrame.style.display = 'flex';
+}
+
+document.getElementById('showGame').onclick = showGame;
