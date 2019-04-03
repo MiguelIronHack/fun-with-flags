@@ -383,6 +383,12 @@ a {
   .input-player-name-header {
     animation: typing 5.5s steps(90, end), cursor 1.75s step-end infinite;
   }
+  .card {
+    margin: 0 10%;
+  }
+  .nav-list li {
+    padding: 0.5rem 2rem;
+  }
 }
 
 @media only screen and (max-width: 900px) {
@@ -394,6 +400,9 @@ a {
   }
   .nav-list li {
     padding: 0.5rem 1rem;
+  }
+  .game-explanation {
+    margin: 2rem 15%;
   }
 }
 

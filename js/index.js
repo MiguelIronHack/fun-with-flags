@@ -353,3 +353,7 @@ const navLinks = document.querySelectorAll('.nav-list a');
 navLinks.forEach(link => {
   link.onmouseover = setupNavMain;
 });
+
+// // local storage
+// localStorage.setItem('oldPlayer' player);
+// var oldPlayer = localStorage.getItem(player);
