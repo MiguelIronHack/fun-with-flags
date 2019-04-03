@@ -192,8 +192,6 @@ function startGame(flagList) {
       ? currentLevel.push(level2)
       : currentLevel.splice(removeCorrectAnswerFromArray, 1);
 
-    console.log(currentLevel);
-
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
       // Correct answer
       currentFlagName.splice(0, 2);
