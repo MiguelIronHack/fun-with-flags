@@ -33,10 +33,6 @@ p {
   flex-direction: column;
 }
 
-.d-0 {
-  display: none;
-}
-
 /* success modal */
 .modal {
   display: none;
