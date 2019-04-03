@@ -28,7 +28,6 @@ light color#d1e8e2
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  margin-bottom: 1rem;
 }
 
 .d-0 {
@@ -227,6 +226,7 @@ a {
 .input-container {
   display: flex;
   align-items: center;
+  margin-bottom: 1.2rem;
 }
 
 .input {
@@ -305,7 +305,13 @@ a {
 .footer-content {
   margin: 0 1rem;
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
+  .window-game > * {
+    height: 14rem;
+  }
+}
+
+@media only screen and (max-width: 660px) {
   .body {
     overflow: hidden;
   }
@@ -321,8 +327,13 @@ a {
     text-transform: none;
   }
   .window-game > * {
-    height: 12rem;
+    height: 10rem;
   }
+
+  .input-container {
+    margin-bottom: 0;
+  }
+
   .input {
     padding: 0.3rem 0.4rem;
     font-size: 1rem;
@@ -330,5 +341,6 @@ a {
   .btn {
     padding: 0.3rem 0.4rem;
     font-size: 1rem;
+    border-radius: 50%;
   }
 }
