@@ -1,7 +1,6 @@
 window.onload = getFlags;
-//////////////////////////////
-//*  Function Constructor *//
-/////////////////////////////
+const submitAnswer = document.getElementById('submit-answer');
+const gameTab = document.getElementById('showGame');
 
 class Player {
   constructor(name, score) {
@@ -16,11 +15,53 @@ class Player {
 let player;
 let userName = [];
 
+///////////*  Timer *///////////
+let points = 30;
+function timer() {
+  moveProgressBar();
+  let timeLeft = 30;
+  let timerDiv = document.getElementById('progress-bar');
+  setInterval(countDown, 1000);
+  submitAnswer.addEventListener('click', resetTimer);
+  function countDown() {
+    if (timeLeft == 0) {
+      timerDiv.innerHTML = '0 bonus points';
+    } else {
+      timerDiv.innerText = `${timeLeft} bonus points`;
+      timeLeft--;
+      points--;
+    }
+  }
+  // reset timer
+  function resetTimer() {
+    timeLeft = 30;
+    points = 30;
+  }
+}
+// Progress bar
+function moveProgressBar() {
+  const e = document.getElementById('progress-bar');
+  submitAnswer.addEventListener('click', resetWidth);
+
+  let width = 100;
+  let id = setInterval(moveBar, 500);
+  function moveBar() {
+    if (width < 40) {
+      clearInterval(id);
+    } else {
+      width--;
+      e.style.width = width + '%';
+    }
+  }
+  function resetWidth() {
+    width = 100;
+  }
+}
+
 const getName = () => {
   /* Name input */
   const nameInput = document.getElementById('input-name');
   /* show game tab */
-  const gameTab = document.getElementById('showGame');
 
   document.getElementById('name-btn').onclick = getName;
   // throw error if the name is too small
@@ -28,9 +69,9 @@ const getName = () => {
     error();
   } else {
     // Create new player
-
     player = new Player(nameInput.value, 0);
-
+    // Clean input
+    document.getElementById('input-name').value = '';
     // Create new table row
     const tableBody = document.getElementById('t-body');
     tableBody.insertAdjacentHTML(
@@ -39,6 +80,8 @@ const getName = () => {
     <td>${player.name} </td>
     <td id='${player.name}'>${player.score} </td>`
     );
+    // Start timer
+    timer();
 
     userName.push(player);
 
@@ -76,14 +119,13 @@ let correctAnswer;
 
 //////////// Flag Vars ////////////
 const flags = [];
-console.log(flags);
 
 const currentFlagName = [];
 
 function startGame(flagList) {
-  //* Current Flag Number *//
+  //* Current Level *//
 
-  const devSquad = [
+  const currentLevel = [
     flagList[48],
     flagList[77],
     flagList[107],
@@ -96,21 +138,35 @@ function startGame(flagList) {
     flagList[239],
     flagList[212]
   ];
+  let level2 = [
+    flagList[205],
+    flagList[218],
+    flagList[236],
+    flagList[111],
+    flagList[114],
+    flagList[175],
+    flagList[181],
+    flagList[152],
+    flagList[144],
+    flagList[133],
+    flagList[116]
+  ];
 
-  flags.push(devSquad);
+  flags.push(currentLevel);
 
   //////////// Get a random flag ///////////////
   /////////////////////////////////////////////
   function newFlag() {
-    const randomFlag = Math.floor(Math.random() * devSquad.length);
-    currentFlagName.push(devSquad[randomFlag].name);
-    currentFlagName.push(devSquad[randomFlag].numericCode);
-
+    if (!currentLevel.length) return showScore();
+    const randomFlag = Math.floor(Math.random() * currentLevel.length);
+    currentFlagName.push(currentLevel[randomFlag].name);
+    currentFlagName.push(currentLevel[randomFlag].numericCode);
+    // Create and append img in the html
     const img = document.createElement('img');
     img.classList.add('d-0');
-    img.id = `${devSquad[randomFlag].numericCode}`;
-    img.alt = `${devSquad[randomFlag].name}`;
-    img.src = `${devSquad[randomFlag].flag}`;
+    img.id = `${currentLevel[randomFlag].numericCode}`;
+    img.alt = `${currentLevel[randomFlag].name}`;
+    img.src = `${currentLevel[randomFlag].flag}`;
     document.getElementById('mainframe').appendChild(img);
 
     console.log(currentFlagName);
@@ -139,23 +195,24 @@ function startGame(flagList) {
     }
     const userAnswer = document.getElementById('flag-input').value;
 
+    let removeCorrectAnswerFromArray = currentLevel
+      .map(function(e) {
+        return e.name;
+      })
+      .indexOf(currentFlagName[0]);
+
+    !currentLevel.length
+      ? currentLevel.push(level2)
+      : currentLevel.splice(removeCorrectAnswerFromArray, 1);
+
+    console.log(currentLevel);
+
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
       // Correct answer
       currentFlagName.splice(0, 2);
       document.getElementById('mainframe').firstChild.remove();
-      player.score += 30;
+      player.score += points + 1;
       document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
-      // remove correct answer from the array
-      // remove correct answer from the array
-      // remove correct answer from the array
-      const removeCorrectAnswerFromArray = devSquad[0]
-        .map(function(e) {
-          return e.name;
-        })
-        .indexOf(currentFlagName[0]);
-
-      devSquad.splice(removeCorrectAnswerFromArray, 1);
-      console.log(devSquad);
       correct();
       newFlag();
     } else {
@@ -164,15 +221,12 @@ function startGame(flagList) {
       currentFlagName.splice(0, 2);
       console.log(currentFlagName);
       document.getElementById('mainframe').firstChild.remove();
-      devSquad.splice();
-
+      currentLevel.splice();
       newFlag();
     }
     document.getElementById('flag-input').value = '';
   }
-
-  const submit = document.getElementById('submit-answer');
-  submit.onclick = result;
+  submitAnswer.onclick = result;
 }
 
 ////////////////////////////////
@@ -227,7 +281,7 @@ function showScore() {
   gameFrame.style.display = 'none';
 
   /* Change nav  */
-  document.getElementById('showGame').classList = '';
+  gameTab.classList = '';
   document.getElementById('home').classList = '';
   document.getElementById('score-list').classList = 'active';
 }
@@ -248,7 +302,7 @@ function showGame() {
   /* Change nav  */
   document.getElementById('score-list').classList = '';
   document.getElementById('home').classList = '';
-  document.getElementById('showGame').classList = 'active';
+  gameTab.classList = 'active';
 }
 
 /////////////////////////////////////
@@ -267,7 +321,7 @@ function showHome() {
   /* Change nav  */
   document.getElementById('score-list').classList = '';
   document.getElementById('home').classList = 'active';
-  document.getElementById('showGame').classList = '';
+  gameTab.classList = '';
 }
 
 /* Use Nav */
