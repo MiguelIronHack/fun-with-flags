@@ -53,6 +53,7 @@ function timer() {
     points = 30;
   }
 }
+
 // Progress bar
 function moveProgressBar() {
   const e = document.getElementById('progress-bar');
@@ -100,7 +101,7 @@ const getName = () => {
     <td>${player.name} </td>
     <td id='${player.name}'>${player.score} </td>`
     );
-    // Start timer
+    // Start timergameTab
     timer();
 
     userName.push(player);
@@ -139,15 +140,15 @@ function navError() {
 ///////////////////////
 
 let correctAnswer;
-
+let functionStopper = '';
 // Flag Variables //
-const flags = [];
-const currentFlagName = [];
-
+let flags = [];
+let currentFlagName = [];
+let currentLevel;
 function startGame(flagList) {
   //* Current Level *//
 
-  const currentLevel = [
+  currentLevel = [
     flagList[48],
     flagList[77],
     flagList[107],
@@ -177,7 +178,15 @@ function startGame(flagList) {
 
   //////////// Get a random flag ///////////////
   function newFlag() {
-    if (!currentLevel.length) return showScore();
+    // Change nav to scoreboard after array is empty
+    if (!currentLevel.length) {
+      functionStopper = 'stop';
+      // Open level finished
+      setTimeout(levelFinished, 1000);
+      return showScore();
+    }
+
+    //
     const randomFlag = Math.floor(Math.random() * currentLevel.length);
     currentFlagName.push(currentLevel[randomFlag].name);
     currentFlagName.push(currentLevel[randomFlag].numericCode);
@@ -198,9 +207,13 @@ function startGame(flagList) {
       correctAnswer = 'iran';
     }
     if (correctAnswer == 'Viet Nam') {
-      correctAnswer = 'vietnam';
+      correctAnswer = 'vietnam' || 'viet nam';
     }
-    const userAnswer = document.getElementById('flag-input').value;
+    if (correctAnswer == 'United States of America') {
+      correctAnswer = 'usa' || 'united states of america';
+    }
+
+    let userAnswer = document.getElementById('flag-input').value;
 
     let removeCorrectAnswerFromArray = currentLevel
       .map(function(e) {
@@ -210,9 +223,6 @@ function startGame(flagList) {
 
     if (currentLevel.length) {
       currentLevel.splice(removeCorrectAnswerFromArray, 1);
-    } else {
-      flags.push(level2);
-      newFlag();
     }
 
     if (
@@ -224,7 +234,7 @@ function startGame(flagList) {
       player.score += points + 10;
       document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
       correct();
-      newFlag();
+      setTimeout(newFlag, 1000);
     } else {
       incorrect();
       // Incorrect answer
@@ -233,7 +243,7 @@ function startGame(flagList) {
       currentLevel.splice();
       newFlag();
     }
-    document.getElementById('flag-input').value = '';
+    userAnswer = '';
   }
   submitAnswer.onclick = result;
 }
@@ -254,10 +264,10 @@ function incorrect() {
 }
 
 function levelFinished() {
-  const endOfLevel = document.getElementById('levelFinished');
+  const endOfLevel = document.getElementById('level-finished');
   endOfLevel.style.display = 'flex';
 
-  setTimeout(() => (endOfLevel.style.display = 'none'), 1000);
+  setTimeout(() => (endOfLevel.style.display = 'none'), 2500);
 }
 
 //////////////////////////////////////
@@ -283,6 +293,10 @@ function showScore() {
 ///////////////////////////////////
 
 function showGame() {
+  if (functionStopper == 'stop') {
+    location.reload();
+    return;
+  }
   playerSection.style.display = 'none';
   playerName.style.display = 'none';
   gameFrame.style.display = 'flex';
@@ -299,6 +313,10 @@ function showGame() {
 ///////////////////////////////////
 
 function showHome() {
+  if (functionStopper == 'stop') {
+    location.reload();
+    return;
+  }
   playerSection.style.display = 'none';
   playerName.style.display = 'block';
   gameFrame.style.display = 'none';
@@ -327,7 +345,6 @@ function showAbout() {
 }
 
 /* Use Nav */
-
 function setupNavMain(evt) {
   if (!userName.length) {
     evt.preventDefault();
@@ -350,7 +367,3 @@ const navLinks = document.querySelectorAll('.nav-list a');
 navLinks.forEach(link => {
   link.onmouseover = setupNavMain;
 });
-
-// // local storage
-// localStorage.setItem('oldPlayer' player);
-// var oldPlayer = localStorage.getItem(player);
