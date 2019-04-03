@@ -1,4 +1,5 @@
 //*  AJAX *//
+const url = 'https://restcountries.eu/rest/v2/all';
 function getFlags() {
   axios
     .get(url)
@@ -90,7 +91,7 @@ const getName = () => {
     // Create new player
     player = new Player(nameInput.value, 0);
     // Clean input
-    document.getElementById('input-name').value = '';
+    nameInput.value = '';
     // Create new table row
     const tableBody = document.getElementById('t-body');
     tableBody.insertAdjacentHTML(
@@ -137,7 +138,6 @@ function navError() {
 /////* Main Frame */////
 ///////////////////////
 
-const url = 'https://restcountries.eu/rest/v2/all';
 let correctAnswer;
 
 // Flag Variables //
@@ -210,6 +210,9 @@ function startGame(flagList) {
 
     if (currentLevel.length) {
       currentLevel.splice(removeCorrectAnswerFromArray, 1);
+    } else {
+      flags.push(level2);
+      newFlag();
     }
 
     if (
@@ -248,6 +251,13 @@ function incorrect() {
   incorrect.style.display = 'flex';
 
   setTimeout(() => (incorrect.style.display = 'none'), 1000);
+}
+
+function levelFinished() {
+  const endOfLevel = document.getElementById('levelFinished');
+  endOfLevel.style.display = 'flex';
+
+  setTimeout(() => (endOfLevel.style.display = 'none'), 1000);
 }
 
 //////////////////////////////////////
