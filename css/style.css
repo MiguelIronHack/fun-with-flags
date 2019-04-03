@@ -294,14 +294,13 @@ a:hover {
 .table-header {
   display: grid;
   grid-template-columns: 20vw 20vw;
-  justify-content: space-around;
-  width: 80vw;
+  justify-content: space-between;
+  width: 30vw;
 }
 
 .table-content > *,
 .table-header > * {
   display: flex;
-  justify-content: center;
   align-items: center;
   text-align: center;
 }
@@ -423,6 +422,10 @@ a:hover {
   }
   .game-explanation {
     margin: 2rem 15%;
+  }
+  .table-content,
+  .table-header {
+    width: 50vw;
   }
 }
 
