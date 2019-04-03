@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.8.1/js/all.js"
+      integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="./js/nav.js"></script>
+    <script src="./js/index.js" type="module"></script>
+    <script src="./js/errorHandling.js" type="module"></script>
+    <title>Fun With Flags</title>
+  </head>
+  <body class="body">
+    <div class="game-content">
+      <header class="header txt-act">
+        <h1 class="header-title">
+          fun with flags
+          <i class="fas fa-globe-africa"></i>
+        </h1>
+      </header>
+
+      <!-- Nav -->
+      <main class="main txt-act">
+        <nav class="navbar">
+          <ul class="nav-list">
+            <li>
+              <a id="home" class="active" href="#home">home</a>
+            </li>
+            <li>
+              <a id="showGame" href="#game">game</a>
+            </li>
+            <li>
+              <a id="score-list" href="#score">score</a>
+            </li>
+            <li>
+              <a id="about" href="#about">about</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Name Input -->
+        <section id="player-name" class="player-name">
+          <h4 class="input-player-name-header">input your name please</h4>
+          <div class="input-div">
+            <input
+              id="input-name"
+              class="input-player-name"
+              type="text"
+              autofocus
+              autocomplete="off"
+            />
+            <button id="name-btn" class="btn name-submit" type="submit">
+              <i class="fas fa-play"></i>
+            </button>
+          </div>
+        </section>
+        <!-- Success -->
+        <div class="success modal" id="success">
+          <div class="success-content">
+            Correct!
+          </div>
+        </div>
+        <!-- Try Again -->
+        <div class="incorrect modal" id="incorrect">
+          <div class="incorrect-content">
+            Incorrect!
+          </div>
+        </div>
+        <!-- Error -->
+        <div class="error modal" id="name-error">
+          <div class="modal-content">
+            The name should have at least two letters
+          </div>
+          <button class="btn" id="close-error">
+            <i class="fas fa-times close-btn"></i>
+          </button>
+        </div>
+        <!-- Game Frame -->
+        <section id="game-frame" class="main-form">
+          <div id="timer" class="timer bar">
+            <div id="progress-bar" class="progress-bar bar"></div>
+          </div>
+          <div id="mainframe" class="window-game b"></div>
+          <h2 class="form-header">
+            This is the country flag of...
+          </h2>
+          <div class="input-container">
+            <input
+              id="flag-input"
+              class="input b"
+              type="text"
+              placeholder="ex: Ecuador"
+              autocomplete="off"
+              required
+            />
+            <button id="submit-answer" class="b btn answer-btn" type="button">
+              <i class="fas fa-check"></i>
+            </button>
+          </div>
+        </section>
+      </main>
+      <!-- Page 3 -->
+      <section class="scores">
+        <table class="table" id="player-section">
+          <tr class="table-header">
+            <th>Name</th>
+            <th>Score</th>
+          </tr>
+          <tr class="table-content" id="t-body">
+            <td id="score-name"></td>
+            <td id="score-score"></td>
+          </tr>
+        </table>
+      </section>
+      <!-- Page 4 -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div>&copy; Miguel Bento</div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
