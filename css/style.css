@@ -117,15 +117,21 @@ a {
 /* header */
 
 .header {
+  display: flex;
+  align-items: center;
   color: #d1e8e2;
-  border-bottom: 2px solid #d1e8e2;
+
   width: max-content;
   margin: 1rem auto;
   text-align: center;
 }
+.globe {
+  margin-right: 1rem;
+}
 .header-title {
   margin: 0;
   font-size: 2.5rem;
+  border-bottom: 2px solid #d1e8e2;
 }
 .nav-list {
   display: flex;
@@ -276,6 +282,7 @@ a {
 }
 /* About Me */
 .about-me {
+  font-size: 1.3rem;
   display: none;
   flex-direction: column;
 }
@@ -295,17 +302,28 @@ a {
     'icons about'
     'header about';
 }
+.card-img-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.www {
+  font-size: 1rem;
+}
+.www:hover {
+  color: #ffcb9a;
+  transition: all 0.5s ease-out;
+}
 .icons {
   grid-area: icons;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   border-bottom: 1px solid #ffcb9a;
 }
 .card-img {
   grid-area: img;
   display: flex;
-  justify-self: center;
   height: 7rem;
 }
 .icon {
@@ -355,12 +373,19 @@ a {
 .footer-content {
   margin: 0 1rem;
 }
+
+@media only screen and (min-width: 1000px) {
+  .input-player-name-header {
+    animation: typing 5.5s steps(90, end), cursor 1.75s step-end infinite;
+  }
+}
+
 @media only screen and (max-width: 900px) {
   .window-game > * {
     height: 14rem;
   }
   .card {
-    margin: 0 20%;
+    margin: 0 10%;
   }
 }
 
