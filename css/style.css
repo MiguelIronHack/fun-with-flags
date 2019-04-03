@@ -190,6 +190,11 @@ a {
   width: 6rem;
 }
 
+.game-explanation {
+  margin: 3rem 35%;
+  text-transform: none;
+}
+
 /* mainframe */
 .bar {
   display: flex;
@@ -386,6 +391,9 @@ a {
   }
   .card {
     margin: 0 10%;
+  }
+  .nav-list li {
+    padding: 0.5rem 1rem;
   }
 }
 

@@ -230,7 +230,7 @@ function startGame(flagList) {
       // Correct answer
       currentFlagName.splice(0, 2);
       mainFrame.firstChild.remove();
-      player.score += points + 1;
+      player.score += points + 10;
       document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
       correct();
       newFlag();
