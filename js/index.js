@@ -94,7 +94,6 @@ const getName = () => {
     /* hide name input */
     nameInput.parentElement.parentElement.style.display = 'none';
   }
-  console.log(userName);
 };
 document.getElementById('name-btn').onclick = getName;
 
@@ -157,7 +156,7 @@ function startGame(flagList) {
     img.src = `${currentLevel[randomFlag].flag}`;
     document.getElementById('mainframe').appendChild(img);
 
-    console.log(currentFlagName);
+    //console.log(currentFlagName);
     //////// Correct Answer //////////
     correctAnswer = currentFlagName[0];
     correctAnswer.toLowerCase().replace(/\W\s]/g);
