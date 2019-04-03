@@ -1,4 +1,5 @@
 //*  AJAX *//
+const url = 'https://restcountries.eu/rest/v2/all';
 function getFlags() {
   axios
     .get(url)
@@ -12,6 +13,7 @@ function getFlags() {
 window.onload = getFlags;
 ////////////////////////
 const submitAnswer = document.getElementById('submit-answer');
+const inputNameBtn = document.getElementById('name-btn');
 const gameTab = document.getElementById('showGame');
 const mainFrame = document.getElementById('mainframe');
 const home = document.getElementById('home');
@@ -70,7 +72,6 @@ function moveProgressBar() {
     width = 100;
   }
 }
-
 //////////////////////////////////////
 ///////////*  Name Input *///////////
 ////////////////////////////////////
@@ -82,7 +83,7 @@ const getName = () => {
   const nameInput = document.getElementById('input-name');
   /* show game tab */
 
-  document.getElementById('name-btn').onclick = getName;
+  inputNameBtn.onclick = getName;
   // throw error if the name is too small
   if (nameInput.value.length < 2) {
     error();
@@ -90,7 +91,7 @@ const getName = () => {
     // Create new player
     player = new Player(nameInput.value, 0);
     // Clean input
-    document.getElementById('input-name').value = '';
+    nameInput.value = '';
     // Create new table row
     const tableBody = document.getElementById('t-body');
     tableBody.insertAdjacentHTML(
@@ -114,7 +115,7 @@ const getName = () => {
     nameInput.parentElement.parentElement.style.display = 'none';
   }
 };
-document.getElementById('name-btn').onclick = getName;
+inputNameBtn.onclick = getName;
 
 /// errors ///
 function error() {
@@ -133,12 +134,10 @@ function navError() {
     error.style.display = 'none';
   };
 }
-
 /////////////////////////
 /////* Main Frame */////
 ///////////////////////
 
-const url = 'https://restcountries.eu/rest/v2/all';
 let correctAnswer;
 
 // Flag Variables //
@@ -174,11 +173,9 @@ function startGame(flagList) {
     flagList[133],
     flagList[116]
   ];
-
   flags.push(currentLevel);
 
   //////////// Get a random flag ///////////////
-  /////////////////////////////////////////////
   function newFlag() {
     if (!currentLevel.length) return showScore();
     const randomFlag = Math.floor(Math.random() * currentLevel.length);
@@ -186,22 +183,13 @@ function startGame(flagList) {
     currentFlagName.push(currentLevel[randomFlag].numericCode);
     // Create and append img in the html
     const img = document.createElement('img');
-    img.classList.add('d-0');
     img.id = `${currentLevel[randomFlag].numericCode}`;
     img.alt = `${currentLevel[randomFlag].name}`;
     img.src = `${currentLevel[randomFlag].flag}`;
     mainFrame.appendChild(img);
-
-    //console.log(currentFlagName);
     //////// Correct Answer //////////
     correctAnswer = currentFlagName[0];
     correctAnswer.toLowerCase().replace(/\W\s]/g);
-
-    if (
-      document.getElementById(`${currentFlagName[1]}`).id == currentFlagName[1]
-    ) {
-      document.getElementById(`${currentFlagName[1]}`).classList.toggle('d-0');
-    }
   }
   newFlag();
   //* Answer Result *//
@@ -223,10 +211,13 @@ function startGame(flagList) {
     if (currentLevel.length) {
       currentLevel.splice(removeCorrectAnswerFromArray, 1);
     } else {
-      console.log('hi');
+      flags.push(level2);
+      newFlag();
     }
 
-    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+    if (
+      userAnswer.toLowerCase().trim() === correctAnswer.toLowerCase().trim()
+    ) {
       // Correct answer
       currentFlagName.splice(0, 2);
       mainFrame.firstChild.remove();
@@ -248,7 +239,6 @@ function startGame(flagList) {
 }
 
 /* Answer */
-
 function correct() {
   const success = document.getElementById('success');
   success.style.display = 'flex';
@@ -261,6 +251,13 @@ function incorrect() {
   incorrect.style.display = 'flex';
 
   setTimeout(() => (incorrect.style.display = 'none'), 1000);
+}
+
+function levelFinished() {
+  const endOfLevel = document.getElementById('levelFinished');
+  endOfLevel.style.display = 'flex';
+
+  setTimeout(() => (endOfLevel.style.display = 'none'), 1000);
 }
 
 //////////////////////////////////////

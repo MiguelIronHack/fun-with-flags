@@ -33,10 +33,6 @@ p {
   flex-direction: column;
 }
 
-.d-0 {
-  display: none;
-}
-
 /* success modal */
 .modal {
   display: none;
@@ -294,6 +290,10 @@ a {
 .about-me-text {
   border-left: 1px solid #ffcb9a;
   padding: 1rem;
+}
+.section-header {
+  text-align: center;
+  font-weight: 200;
 }
 .card {
   display: grid;
