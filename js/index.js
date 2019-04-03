@@ -1,21 +1,34 @@
+//*  AJAX *//
+function getFlags() {
+  axios
+    .get(url)
+    .then(res => {
+      startGame(res.data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
 window.onload = getFlags;
+////////////////////////
 const submitAnswer = document.getElementById('submit-answer');
 const gameTab = document.getElementById('showGame');
-
+const mainFrame = document.getElementById('mainframe');
+const home = document.getElementById('home');
+const scoreList = document.getElementById('score-list');
+const about = document.getElementById('about');
+const playerSection = document.getElementById('player-section');
+const playerName = document.getElementById('player-name');
+const gameFrame = document.getElementById('game-frame');
+const aboutMe = document.getElementById('about-me');
+//////////////////////
 class Player {
   constructor(name, score) {
     this.name = name;
     this.score = score;
   }
 }
-
-//////////////////////////////////////
-///////////*  Name Input *///////////
-////////////////////////////////////
-let player;
-let userName = [];
-
-///////////*  Timer *///////////
+//*  Timer *//
 let points = 30;
 function timer() {
   moveProgressBar();
@@ -58,6 +71,12 @@ function moveProgressBar() {
   }
 }
 
+//////////////////////////////////////
+///////////*  Name Input *///////////
+////////////////////////////////////
+let player;
+let userName = [];
+
 const getName = () => {
   /* Name input */
   const nameInput = document.getElementById('input-name');
@@ -86,16 +105,34 @@ const getName = () => {
     userName.push(player);
 
     /* Change active nav */
-    document.getElementById('home').classList = '';
+    home.classList = '';
     gameTab.classList = 'active';
 
     /* open mainframe */
-    document.getElementById('mainframe').parentElement.style.display = 'flex';
+    mainFrame.parentElement.style.display = 'flex';
     /* hide name input */
     nameInput.parentElement.parentElement.style.display = 'none';
   }
 };
 document.getElementById('name-btn').onclick = getName;
+
+/// errors ///
+function error() {
+  const error = document.getElementById('name-error');
+  error.style.display = 'flex';
+
+  document.getElementById('close-error').onclick = function() {
+    error.style.display = 'none';
+  };
+}
+function navError() {
+  const error = document.getElementById('nav-error');
+  error.style.display = 'flex';
+
+  document.getElementById('close-nav-error').onclick = function() {
+    error.style.display = 'none';
+  };
+}
 
 /////////////////////////
 /////* Main Frame */////
@@ -104,9 +141,8 @@ document.getElementById('name-btn').onclick = getName;
 const url = 'https://restcountries.eu/rest/v2/all';
 let correctAnswer;
 
-//////////// Flag Vars ////////////
+// Flag Variables //
 const flags = [];
-
 const currentFlagName = [];
 
 function startGame(flagList) {
@@ -154,7 +190,7 @@ function startGame(flagList) {
     img.id = `${currentLevel[randomFlag].numericCode}`;
     img.alt = `${currentLevel[randomFlag].name}`;
     img.src = `${currentLevel[randomFlag].flag}`;
-    document.getElementById('mainframe').appendChild(img);
+    mainFrame.appendChild(img);
 
     //console.log(currentFlagName);
     //////// Correct Answer //////////
@@ -168,11 +204,7 @@ function startGame(flagList) {
     }
   }
   newFlag();
-
-  //////////////////////
   //* Answer Result *//
-  ////////////////////
-
   function result() {
     if (correctAnswer == 'Iran (Islamic Republic of)') {
       correctAnswer = 'iran';
@@ -188,16 +220,16 @@ function startGame(flagList) {
       })
       .indexOf(currentFlagName[0]);
 
-    !currentLevel.length
-      ? currentLevel.push(level2)
-      : currentLevel.splice(removeCorrectAnswerFromArray, 1);
-
-    console.log(currentLevel);
+    if (currentLevel.length) {
+      currentLevel.splice(removeCorrectAnswerFromArray, 1);
+    } else {
+      console.log('hi');
+    }
 
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
       // Correct answer
       currentFlagName.splice(0, 2);
-      document.getElementById('mainframe').firstChild.remove();
+      mainFrame.firstChild.remove();
       player.score += points + 1;
       document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
       correct();
@@ -206,8 +238,7 @@ function startGame(flagList) {
       incorrect();
       // Incorrect answer
       currentFlagName.splice(0, 2);
-      console.log(currentFlagName);
-      document.getElementById('mainframe').firstChild.remove();
+      mainFrame.firstChild.remove();
       currentLevel.splice();
       newFlag();
     }
@@ -216,9 +247,7 @@ function startGame(flagList) {
   submitAnswer.onclick = result;
 }
 
-////////////////////////////////
-//////*  Correct Answer *//////
-//////////////////////////////
+/* Answer Boolean */
 
 function correct() {
   const success = document.getElementById('success');
@@ -234,43 +263,22 @@ function incorrect() {
   setTimeout(() => (incorrect.style.display = 'none'), 1000);
 }
 
-//////////////
-//*  AJAX *//
-////////////
-function getFlags() {
-  axios
-    .get(url)
-    .then(res => {
-      startGame(res.data);
-    })
-    .catch(err => {
-      console.error(err);
-    });
-}
-
-///////////////////////////////////////////
-
-document.getElementById('player-section').style.display = 'none';
-
-/* Players  */
-
 //////////////////////////////////////
 ///////////*  Show Score *///////////
 ////////////////////////////////////
 
 function showScore() {
-  const scoreList = document.getElementById('player-section');
-  const playerName = document.getElementById('player-name');
-  const gameFrame = document.getElementById('game-frame');
-  scoreList.style.display = 'flex';
-  scoreList.style.justifyContent = 'center';
+  playerSection.style.display = 'flex';
+  playerSection.style.justifyContent = 'center';
   playerName.style.display = 'none';
   gameFrame.style.display = 'none';
+  aboutMe.style.display = 'none';
 
   /* Change nav  */
   gameTab.classList = '';
-  document.getElementById('home').classList = '';
-  document.getElementById('score-list').classList = 'active';
+  home.classList = '';
+  scoreList.classList = 'active';
+  about.classList = '';
 }
 
 /////////////////////////////////////
@@ -278,18 +286,15 @@ function showScore() {
 ///////////////////////////////////
 
 function showGame() {
-  const scoreList = document.getElementById('player-section');
-  const playerName = document.getElementById('player-name');
-  const gameFrame = document.getElementById('game-frame');
-
-  scoreList.style.display = 'none';
+  playerSection.style.display = 'none';
   playerName.style.display = 'none';
   gameFrame.style.display = 'flex';
-
+  aboutMe.style.display = 'none';
   /* Change nav  */
-  document.getElementById('score-list').classList = '';
-  document.getElementById('home').classList = '';
+  scoreList.classList = '';
+  home.classList = '';
   gameTab.classList = 'active';
+  about.classList = '';
 }
 
 /////////////////////////////////////
@@ -297,18 +302,31 @@ function showGame() {
 ///////////////////////////////////
 
 function showHome() {
-  const scoreList = document.getElementById('player-section');
-  const playerName = document.getElementById('player-name');
-  const gameFrame = document.getElementById('game-frame');
-
-  scoreList.style.display = 'none';
+  playerSection.style.display = 'none';
   playerName.style.display = 'block';
   gameFrame.style.display = 'none';
+  aboutMe.style.display = 'none';
 
   /* Change nav  */
-  document.getElementById('score-list').classList = '';
-  document.getElementById('home').classList = 'active';
+  scoreList.classList = '';
+  home.classList = 'active';
   gameTab.classList = '';
+  about.classList = '';
+}
+/////////////////////////////////////
+///////////*  Show About *///////////
+///////////////////////////////////
+
+function showAbout() {
+  playerSection.style.display = 'none';
+  playerName.style.display = 'none';
+  gameFrame.style.display = 'none';
+  aboutMe.style.display = 'flex';
+  /* Change nav  */
+  scoreList.classList = '';
+  home.classList = '';
+  gameTab.classList = '';
+  about.classList = 'active';
 }
 
 /* Use Nav */
@@ -316,12 +334,18 @@ function showHome() {
 function setupNavMain(evt) {
   if (!userName.length) {
     evt.preventDefault();
+    this.onclick = navError;
   } else if (this.id == 'showGame') {
     this.onclick = showGame;
-  } else if (this.id == 'home') {
-    this.onclick = showHome;
   } else if (this.id == 'score-list') {
     this.onclick = showScore;
+  }
+
+  if (this.id == 'home') {
+    this.onclick = showHome;
+  }
+  if (this.id == 'about') {
+    this.onclick = showAbout;
   }
 }
 

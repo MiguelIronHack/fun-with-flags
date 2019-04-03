@@ -11,10 +11,9 @@
       integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ"
       crossorigin="anonymous"
     ></script>
-    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
     <script src="./js/nav.js"></script>
-    <script src="./js/index.js" type="module"></script>
-    <script src="./js/errorHandling.js" type="module"></script>
+
     <title>Fun With Flags</title>
   </head>
   <body class="body">
@@ -61,24 +60,33 @@
             </button>
           </div>
         </section>
-        <!-- Success -->
+        <!-- Correct Answer -->
         <div class="success modal" id="success">
           <div class="success-content">
             Correct!
           </div>
         </div>
-        <!-- Try Again -->
+        <!-- Incorrect Answer -->
         <div class="incorrect modal" id="incorrect">
           <div class="incorrect-content">
             Incorrect!
           </div>
         </div>
-        <!-- Error -->
+        <!-- Input Error -->
         <div class="error modal" id="name-error">
           <div class="modal-content">
             The name should have at least two letters
           </div>
           <button class="btn" id="close-error">
+            <i class="fas fa-times close-btn"></i>
+          </button>
+        </div>
+        <!-- Nav Error -->
+        <div class="error modal" id="nav-error">
+          <div class="modal-content">
+            Please insert your name.
+          </div>
+          <button class="btn" id="close-nav-error">
             <i class="fas fa-times close-btn"></i>
           </button>
         </div>
@@ -106,7 +114,7 @@
           </div>
         </section>
       </main>
-      <!-- Page 3 -->
+      <!-- Score Board -->
       <section class="scores">
         <table class="table" id="player-section">
           <tr class="table-header">
@@ -119,12 +127,52 @@
           </tr>
         </table>
       </section>
-      <!-- Page 4 -->
+      <!-- About the game -->
+      <section id="about-me" class="about-me">
+        <div class="card">
+          <img
+            class="card-img"
+            src="./img/profile-round-xs.png"
+            alt="Miguel Bento Profile Picture"
+          />
+          <div class="icons">
+            <a
+              class="icon"
+              href="https://www.linkedin.com/in/miguel-bento-603a24178/"
+              target="_blank"
+            >
+              <i class="fab fa-linkedin-in "> </i>
+            </a>
+            <a
+              class="icon"
+              href="https://www.instagram.com/cupids.trick/"
+              target="_blank"
+            >
+              <i class="fab fa-instagram "> </i>
+            </a>
+            <a class="icon" href="www.mr-monkey.net" target="_blank"
+              ><i class="fas fa-coffee "></i
+            ></a>
+          </div>
+          <h4 class="card-header">
+            This game was created by Miguel Bento
+          </h4>
+          <aside>
+            <p class="about-me-text">
+              Fun With Flags is a project developed in Ironhack. The idea comes
+              from the classic flag game and was created with education
+              purposes.
+            </p>
+          </aside>
+        </div>
+      </section>
+      <!-- Footer -->
       <footer class="footer">
         <div class="footer-content">
           <div>&copy; Miguel Bento</div>
         </div>
       </footer>
     </div>
+    <script src="./js/index.js"></script>
   </body>
 </html>
