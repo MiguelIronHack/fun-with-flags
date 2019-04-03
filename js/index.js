@@ -247,7 +247,7 @@ function startGame(flagList) {
   submitAnswer.onclick = result;
 }
 
-/* Answer Boolean */
+/* Answer */
 
 function correct() {
   const success = document.getElementById('success');
@@ -353,3 +353,7 @@ const navLinks = document.querySelectorAll('.nav-list a');
 navLinks.forEach(link => {
   link.onmouseover = setupNavMain;
 });
+
+// // local storage
+// localStorage.setItem('oldPlayer' player);
+// var oldPlayer = localStorage.getItem(player);
