@@ -442,6 +442,9 @@ a:hover {
 }
 
 @media only screen and (max-width: 900px) {
+  .body {
+    overflow: auto;
+  }
   .window-game > * {
     height: 14rem;
   }
@@ -513,6 +516,7 @@ a:hover {
   }
   .about-me-text {
     font-size: 1rem;
+    margin-bottom: 2rem;
   }
   .table-content,
   .table-header {
