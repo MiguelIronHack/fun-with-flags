@@ -170,9 +170,7 @@ function startGame(flagList) {
     flagList[219],
     flagList[179],
     flagList[239],
-    flagList[212]
-  ];
-  let level2 = [
+    flagList[212],
     flagList[205],
     flagList[218],
     flagList[236],
@@ -186,7 +184,6 @@ function startGame(flagList) {
     flagList[116]
   ];
   flags.push(currentLevel);
-
   //////////// Get a random flag ///////////////
   function newFlag() {
     if (!currentLevel.length) {
@@ -218,10 +215,10 @@ function startGame(flagList) {
       correctAnswer = 'iran';
     }
     if (correctAnswer == 'Viet Nam') {
-      correctAnswer = 'vietnam' || 'viet nam';
+      correctAnswer = 'vietnam';
     }
     if (correctAnswer == 'United States of America') {
-      correctAnswer = 'usa' || 'united states of america';
+      correctAnswer = 'usa';
     }
 
     let userAnswer = document.getElementById('flag-input');
@@ -269,9 +266,9 @@ function correct() {
   countStreak++;
   if (countStreak == 3) {
     badge(3);
-  } else if (countStreak == 5) {
-    badge(5);
   } else if (countStreak == 10) {
+    badge(5);
+  } else if (countStreak == 20) {
     badge(10);
   }
   setTimeout(() => (success.style.display = 'none'), 1000);
