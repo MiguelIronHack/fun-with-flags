@@ -289,15 +289,32 @@ a:hover {
   color: #ffcb9a;
   border-bottom: 1px solid #ffcb9a;
 }
-
+.trophies {
+  margin-top: 1rem;
+}
+.bronze {
+  grid-area: tbronze;
+  color: #cd7f32;
+}
+.silver {
+  grid-area: tsilver;
+  color: #c0c0c0;
+}
+.gold {
+  height: 0.3rem;
+  grid-area: tgold;
+  color: #daa520;
+}
 .table-content,
 .table-header {
   display: grid;
-  grid-template-columns: 20vw 20vw;
+  grid-template-columns: 10vw 10vw 10vw;
+  grid-template-areas:
+    'name . score'
+    'tbronze tgold tsilver';
   justify-content: space-between;
   width: 30vw;
 }
-
 .table-content > *,
 .table-header > * {
   display: flex;
@@ -305,21 +322,19 @@ a:hover {
   justify-content: center;
   text-align: center;
 }
+.user-name {
+  grid-area: name;
+}
+.user-score {
+  grid-area: score;
+}
 .trophy {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 10vh;
-}
-.bronze {
-  color: #cd7f32;
-}
-.silver {
-  color: #c0c0c0;
-}
-.gold {
-  color: #daa520;
+  margin-top: 2rem;
+  font-size: 1rem;
 }
 /* About Me */
 .about-header {

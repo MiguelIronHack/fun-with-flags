@@ -98,8 +98,9 @@ const getName = () => {
     tableBody.insertAdjacentHTML(
       'beforeend',
       `
-    <td>${player.name} </td>
-    <td id='${player.name}'>${player.score} </td>`
+    <td class='user-name'>${player.name} </td>
+    <td> </td>
+    <td class='user-score' id='${player.name}'>${player.score} </td>`
     );
     // Start timer
     timer();
@@ -274,7 +275,7 @@ function levelFinished() {
 }
 // The badge system //
 function badge(streak) {
-  let playerName = document.getElementById('player-section');
+  let trophyTable = document.getElementById('trophies');
 
   if (streak == 3) {
     bronzeBadge();
@@ -286,18 +287,22 @@ function badge(streak) {
 
   function bronzeBadge() {
     let trophy =
-      '<div class="trophy"><i class="fas fa-trophy fa-2x bronze"></i>Bronze Trophy</div>';
-    playerName.insertAdjacentHTML('afterend', bronze);
+      '<div id="trophy" class="trophy bronze"><i class="fas fa-trophy fa-2x "></i><p>Bronze Trophy</p></div>';
+    trophyTable.insertAdjacentHTML('beforeend', trophy);
+    points += 10;
   }
   function silverBadge() {
+    document.getElementById('trophy');
     let trophy =
-      '<div class="trophy"><i class="fas fa-trophy fa-2x silver"></i>Silver Trophy</div>';
-    playerName.innerHTML(bronze);
+      '<div id="trophy" class="trophy silver"><i class="fas fa-trophy fa-2x "></i><p>Silver Trophy</p></div>';
+    trophyTable.insertAdjacentHTML('beforeend', trophy);
+    points += 25;
   }
   function goldBadge() {
     let trophy =
-      '<div class="trophy"><i class="fas fa-trophy fa-2x gold"></i>Gold Trophy</div>';
-    playerName.insertAdjacentHTML('afterbegin', trophy);
+      '<div id="trophy" class="trophy gold"><i class="fas fa-trophy fa-2x "></i><p>Gold Trophy</p></div>';
+    trophyTable.insertAdjacentHTML('beforeend', trophy);
+    points += 50;
   }
 }
 
