@@ -211,7 +211,7 @@ function startGame(flagList) {
       correctAnswer = 'usa' || 'united states of america';
     }
 
-    let userAnswer = document.getElementById('flag-input').value;
+    let userAnswer = document.getElementById('flag-input');
 
     let removeCorrectAnswerFromArray = currentLevel
       .map(function(e) {
@@ -224,7 +224,8 @@ function startGame(flagList) {
     }
 
     if (
-      userAnswer.toLowerCase().trim() === correctAnswer.toLowerCase().trim()
+      userAnswer.value.toLowerCase().trim() ===
+      correctAnswer.toLowerCase().trim()
     ) {
       correct();
       setTimeout(newFlag, 1000);
@@ -236,6 +237,9 @@ function startGame(flagList) {
       currentLevel.splice();
       newFlag();
     }
+
+    userAnswer.focus();
+    userAnswer.value = '';
   }
 
   submitAnswer.onclick = result;
