@@ -23,7 +23,20 @@ const playerSection = document.getElementById('player-section');
 const playerName = document.getElementById('player-name');
 const gameFrame = document.getElementById('game-frame');
 const aboutMe = document.getElementById('about-me');
-//////////////////////
+/////////// Press Enter ///////////
+document.getElementById('flag-input').addEventListener('keyup', e => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    submitAnswer.click();
+  }
+});
+document.getElementById('input-name').addEventListener('keyup', e => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    inputNameBtn.click();
+  }
+});
+////
 class Player {
   constructor(name, score) {
     this.name = name;
