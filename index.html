@@ -12,6 +12,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/index.js" type="module"></script>
     <title>Fun With Flags</title>
   </head>
   <body class="body">
@@ -72,7 +73,7 @@
               Bonus points for each second left on the clock.
             </p>
             <br />
-            <p>Answer questions in a row and earn badges.</p>
+            <p>Trophies for consecutive correct answers</p>
           </div>
         </section>
         <!-- Correct Answer -->
@@ -112,6 +113,30 @@
             The End
           </div>
         </div>
+        <!-- Trophy Bronze -->
+        <div class="trophy-modal modal" id="bronze-modal">
+          <div class="trophy-modal-content">
+            Congratulations! <br />
+            Bronze Trophy Unlocked
+          </div>
+          <i class="fas fa-trophy fa-3x bronze-color"></i>
+        </div>
+        <!-- Trophy Silver -->
+        <div class="trophy-modal modal" id="silver-modal">
+          <div class="trophy-modal-content">
+            Congratulations! <br />
+            Silver Trophy Unlocked
+          </div>
+          <i class="fas fa-trophy fa-3x silver-color"></i>
+        </div>
+        <!-- Trophy Gold -->
+        <div class="trophy-modal modal" id="gold-modal">
+          <div class="trophy-modal-content">
+            Congratulations! <br />
+            Gold Trophy Unlocked
+          </div>
+          <i class="fas fa-trophy fa-3x gold-color"></i>
+        </div>
         <!-- Game Frame -->
         <section id="game-frame" class="main-form">
           <div id="timer" class="timer bar">
@@ -128,7 +153,7 @@
               type="text"
               placeholder="ex: Ecuador"
               autocomplete="off"
-              required
+              autofocus
             />
             <button id="submit-answer" class="b btn answer-btn" type="button">
               <i class="fas fa-check"></i>
@@ -194,6 +219,5 @@
         </div>
       </section>
     </div>
-    <script src="./js/index.js"></script>
   </body>
 </html>

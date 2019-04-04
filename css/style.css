@@ -275,6 +275,23 @@ a:hover {
   text-transform: capitalize;
   border-radius: 35px;
 }
+.trophy-modal {
+  text-align: center;
+  line-height: 10rem;
+  color: #d1e8e2;
+  font-size: 2rem;
+  font-weight: 700;
+  background-color: rgba(0, 0, 0, 0.9);
+  text-transform: none;
+}
+.trophy-modal-content {
+  text-align: center;
+  line-height: 10rem;
+  color: #d1e8e2;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: none;
+}
 /* Score List */
 .players {
   display: none;
@@ -323,7 +340,15 @@ a:hover {
   margin-top: 2rem;
   font-size: 1rem;
 }
-
+.bronze-color {
+  color: #cd7f32;
+}
+.silver-color {
+  color: #c0c0c0;
+}
+.gold-color {
+  color: #daa520;
+}
 .bronze {
   font-size: 0.9rem;
   grid-area: tbronze;
