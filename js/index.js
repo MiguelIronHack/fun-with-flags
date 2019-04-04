@@ -101,15 +101,12 @@ const getName = () => {
     <td>${player.name} </td>
     <td id='${player.name}'>${player.score} </td>`
     );
-    // Start timergameTab
+    // Start timer
     timer();
-
     userName.push(player);
-
     /* Change active nav */
     home.classList = '';
     gameTab.classList = 'active';
-
     /* open mainframe */
     mainFrame.parentElement.style.display = 'flex';
     /* hide name input */
@@ -138,7 +135,7 @@ function navError() {
 /////////////////////////
 /////* Main Frame */////
 ///////////////////////
-
+let countStreak = 0;
 let correctAnswer;
 let functionStopper = '';
 // Flag Variables //
@@ -178,11 +175,11 @@ function startGame(flagList) {
 
   //////////// Get a random flag ///////////////
   function newFlag() {
-    // Change nav to scoreboard after array is empty
     if (!currentLevel.length) {
       functionStopper = 'stop';
       // Open level finished
       setTimeout(levelFinished, 1000);
+      // Change nav to scoreboard after array is empty
       return showScore();
     }
 
@@ -228,11 +225,6 @@ function startGame(flagList) {
     if (
       userAnswer.toLowerCase().trim() === correctAnswer.toLowerCase().trim()
     ) {
-      // Correct answer
-      currentFlagName.splice(0, 2);
-      mainFrame.firstChild.remove();
-      player.score += points + 10;
-      document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
       correct();
       setTimeout(newFlag, 1000);
     } else {
@@ -243,23 +235,34 @@ function startGame(flagList) {
       currentLevel.splice();
       newFlag();
     }
-    userAnswer = '';
   }
+
   submitAnswer.onclick = result;
 }
 
 /* Answer */
 function correct() {
+  currentFlagName.splice(0, 2);
+  mainFrame.firstChild.remove();
+  player.score += points + 10;
+  document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
   const success = document.getElementById('success');
   success.style.display = 'flex';
-
+  countStreak++;
+  if (countStreak == 3) {
+    badge(3);
+  } else if (countStreak == 5) {
+    badge(5);
+  } else if (countStreak == 10) {
+    badge(10);
+  }
   setTimeout(() => (success.style.display = 'none'), 1000);
 }
 
 function incorrect() {
   const incorrect = document.getElementById('incorrect');
   incorrect.style.display = 'flex';
-
+  countStreak = 0;
   setTimeout(() => (incorrect.style.display = 'none'), 1000);
 }
 
@@ -268,6 +271,34 @@ function levelFinished() {
   endOfLevel.style.display = 'flex';
 
   setTimeout(() => (endOfLevel.style.display = 'none'), 2500);
+}
+// The badge system //
+function badge(streak) {
+  let playerName = document.getElementById('player-section');
+
+  if (streak == 3) {
+    bronzeBadge();
+  } else if (streak == 5) {
+    silverBadge();
+  } else if (streak == 10) {
+    goldBadge();
+  }
+
+  function bronzeBadge() {
+    let trophy =
+      '<div class="trophy"><i class="fas fa-trophy fa-2x bronze"></i>Bronze Trophy</div>';
+    playerName.insertAdjacentHTML('afterend', bronze);
+  }
+  function silverBadge() {
+    let trophy =
+      '<div class="trophy"><i class="fas fa-trophy fa-2x silver"></i>Silver Trophy</div>';
+    playerName.innerHTML(bronze);
+  }
+  function goldBadge() {
+    let trophy =
+      '<div class="trophy"><i class="fas fa-trophy fa-2x gold"></i>Gold Trophy</div>';
+    playerName.insertAdjacentHTML('afterbegin', trophy);
+  }
 }
 
 //////////////////////////////////////

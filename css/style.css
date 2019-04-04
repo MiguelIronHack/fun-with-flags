@@ -302,7 +302,24 @@ a:hover {
 .table-header > * {
   display: flex;
   align-items: center;
+  justify-content: center;
   text-align: center;
+}
+.trophy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+.bronze {
+  color: #cd7f32;
+}
+.silver {
+  color: #c0c0c0;
+}
+.gold {
+  color: #daa520;
 }
 /* About Me */
 .about-header {
@@ -482,5 +499,9 @@ a:hover {
   }
   .about-me-text {
     font-size: 1rem;
+  }
+  .table-content,
+  .table-header {
+    width: 60vw;
   }
 }
