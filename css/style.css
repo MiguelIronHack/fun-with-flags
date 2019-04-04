@@ -340,6 +340,10 @@ a:hover {
 .about-header {
   text-align: center;
 }
+.and {
+  font-weight: 100;
+  color: #ffcb9a;
+}
 .about-me {
   font-size: 1.3rem;
   display: none;
@@ -349,10 +353,6 @@ a:hover {
 .about-me-text {
   border-left: 1px solid #ffcb9a;
   padding: 1rem;
-}
-.section-header {
-  text-align: center;
-  font-weight: 200;
 }
 .card {
   display: grid;
@@ -421,13 +421,12 @@ a:hover {
 }
 
 .footer {
-  display: none;
+  display: flex;
   align-items: center;
   margin-top: auto;
   padding: 0;
   background: #d1e8e2;
   color: #2c3531;
-  height: 1.3rem;
 }
 .footer-content {
   margin: 0 1rem;
