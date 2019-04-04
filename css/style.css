@@ -292,19 +292,6 @@ a:hover {
 .trophies {
   margin-top: 1rem;
 }
-.bronze {
-  grid-area: tbronze;
-  color: #cd7f32;
-}
-.silver {
-  grid-area: tsilver;
-  color: #c0c0c0;
-}
-.gold {
-  height: 0.3rem;
-  grid-area: tgold;
-  color: #daa520;
-}
 .table-content,
 .table-header {
   display: grid;
@@ -335,6 +322,22 @@ a:hover {
   align-items: center;
   margin-top: 2rem;
   font-size: 1rem;
+}
+
+.bronze {
+  font-size: 0.9rem;
+  grid-area: tbronze;
+  color: #cd7f32;
+}
+.silver {
+  font-size: 1.1rem;
+  grid-area: tsilver;
+  color: #c0c0c0;
+}
+.gold {
+  font-size: 1.3rem;
+  grid-area: tgold;
+  color: #daa520;
 }
 /* About Me */
 .about-header {
