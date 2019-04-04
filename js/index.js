@@ -247,7 +247,7 @@ function startGame(flagList) {
       currentLevel.splice();
       newFlag();
     }
-
+    // clean user input
     userAnswer.focus();
     userAnswer.value = '';
   }
@@ -266,10 +266,13 @@ function correct() {
   countStreak++;
   if (countStreak == 3) {
     badge(3);
+    setTimeout(() => (earnedBadge('bronze'), 2500));
   } else if (countStreak == 10) {
     badge(5);
+    setTimeout(() => (earnedBadge('silver'), 2500));
   } else if (countStreak == 20) {
     badge(10);
+    setTimeout(() => (earnedBadge('gold'), 2500));
   }
   setTimeout(() => (success.style.display = 'none'), 1000);
 }
@@ -286,6 +289,21 @@ function levelFinished() {
   endOfLevel.style.display = 'flex';
 
   setTimeout(() => (endOfLevel.style.display = 'none'), 2500);
+}
+function earnedBadge(trophyType) {
+  const bronze = document.getElementById('bronze-modal');
+  const silver = document.getElementById('silver-modal');
+  const gold = document.getElementById('gold-modal');
+  if (trophyType == 'bronze') {
+    bronze.style.display = 'flex';
+    setTimeout(() => (bronze.style.display = 'none'), 2500);
+  } else if (trophyType == 'silver') {
+    silver.style.display = 'flex';
+    setTimeout(() => (silver.style.display = 'none'), 2000);
+  } else if (trophyType == 'gold') {
+    gold.style.display = 'flex';
+    setTimeout(() => (gold.style.display = 'none'), 2000);
+  }
 }
 // The badge system //
 function badge(streak) {
