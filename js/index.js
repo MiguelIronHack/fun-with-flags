@@ -10,6 +10,7 @@ function getFlags() {
       console.error(err);
     });
 }
+// TEST DEPLOY (REMOVE THIS LATER)
 window.onload = getFlags;
 ////////////////////////
 const submitAnswer = document.getElementById('submit-answer');
