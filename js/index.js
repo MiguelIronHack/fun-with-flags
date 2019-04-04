@@ -184,17 +184,18 @@ function startGame(flagList) {
     flagList[116]
   ];
   flags.push(currentLevel);
+
   //////////// Get a random flag ///////////////
   function newFlag() {
     if (!currentLevel.length) {
       functionStopper = 'stop';
       // Open level finished
       setTimeout(levelFinished, 1000);
+
       // Change nav to scoreboard after array is empty
       return showScore();
     }
-
-    //
+    //////////
     const randomFlag = Math.floor(Math.random() * currentLevel.length);
     currentFlagName.push(currentLevel[randomFlag].name);
     currentFlagName.push(currentLevel[randomFlag].numericCode);
@@ -253,6 +254,7 @@ function startGame(flagList) {
   }
 
   submitAnswer.onclick = result;
+  //// level counter ////
 }
 
 /* Answer */
@@ -264,6 +266,7 @@ function correct() {
   const success = document.getElementById('success');
   success.style.display = 'flex';
   countStreak++;
+
   if (countStreak == 3) {
     badge(3);
     setTimeout(() => (earnedBadge('bronze'), 2500));
@@ -281,6 +284,7 @@ function incorrect() {
   const incorrect = document.getElementById('incorrect');
   incorrect.style.display = 'flex';
   countStreak = 0;
+
   setTimeout(() => (incorrect.style.display = 'none'), 1000);
 }
 
