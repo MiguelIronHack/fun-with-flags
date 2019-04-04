@@ -12,7 +12,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./js/index.js" type="module"></script>
     <title>Fun With Flags</title>
   </head>
   <body class="body">
@@ -68,10 +67,12 @@
               With each correct answer you will earn 10 points.
             </p>
             <br />
+            <h5>Bonus</h5>
             <p>
-              There's no time limit but to achieve a better score you need to
-              submit your answer as fast as you can.
+              Bonus points for each second left on the clock.
             </p>
+            <br />
+            <p>Answer questions in a row and earn badges.</p>
           </div>
         </section>
         <!-- Correct Answer -->
@@ -136,16 +137,20 @@
         </section>
       </main>
       <!-- Score Board -->
-      <section class="scores">
+      <section class="scores" id="score-section">
         <table class="table" id="player-section">
           <tr class="table-header">
             <th>Name</th>
+            <th></th>
             <th>Score</th>
           </tr>
-          <tr class="table-content" id="t-body">
-            <td id="score-name"></td>
-            <td id="score-score"></td>
+          <tr class="table-content" id="t-body"></tr>
+          <tr class="table table-header trophies">
+            <th></th>
+            <th>Trophies</th>
+            <th></th>
           </tr>
+          <tr class="table-content" id="trophies"></tr>
         </table>
       </section>
       <!-- About the game -->
@@ -195,5 +200,6 @@
         </div>
       </footer>
     </div>
+    <script src="./js/index.js"></script>
   </body>
 </html>
