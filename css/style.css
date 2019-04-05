@@ -524,6 +524,7 @@ a:hover {
     margin: 0 1%;
   }
 }
+
 @media only screen and (max-width: 450px) {
   .input-player-name-header {
     animation: typing 3s steps(35, end), cursor 1.75s step-end infinite;
@@ -552,5 +553,10 @@ a:hover {
   .table-content,
   .table-header {
     width: 60vw;
+  }
+}
+@media only screen and (max-width: 330px) {
+  .window-game > * {
+    height: 6rem;
   }
 }

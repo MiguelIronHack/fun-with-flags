@@ -273,7 +273,7 @@ function correct() {
   } else if (countStreak == 10) {
     badge(5);
     setTimeout(() => (earnedBadge('silver'), 2500));
-  } else if (countStreak == 20) {
+  } else if (countStreak == 15) {
     badge(10);
     setTimeout(() => (earnedBadge('gold'), 2500));
   }
@@ -315,9 +315,9 @@ function badge(streak) {
 
   if (streak == 3) {
     bronzeBadge();
-  } else if (streak == 5) {
-    silverBadge();
   } else if (streak == 10) {
+    silverBadge();
+  } else if (streak == 15) {
     goldBadge();
   }
 
