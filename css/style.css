@@ -447,7 +447,7 @@ a:hover {
   }
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1700px) {
   .nav-list {
     margin: 0 0 5rem;
   }
