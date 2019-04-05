@@ -447,6 +447,12 @@ a:hover {
   }
 }
 
+@media only screen and (min-width: 1200px) {
+  .nav-list {
+    margin: 0 0 5rem;
+  }
+}
+
 @media only screen and (min-width: 1000px) {
   .input-player-name-header {
     animation: typing 5.5s steps(90, end), cursor 1.75s step-end infinite;
