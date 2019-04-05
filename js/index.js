@@ -26,6 +26,13 @@ const aboutMe = document.getElementById('about-me');
 /////////// Press Enter ///////////
 document.getElementById('flag-input').addEventListener('keyup', e => {
   if (e.keyCode === 13) {
+    if (
+      document.querySelectorAll(
+        '.modal.success.is-active, .modal.incorrect.is-active .trophy-modal.modal.is-active'
+      ).length
+    ) {
+      return;
+    }
     e.preventDefault();
     submitAnswer.click();
   }
@@ -265,27 +272,44 @@ function correct() {
   document.getElementById(`${player.name}`).innerHTML = `${player.score}`;
   const success = document.getElementById('success');
   success.style.display = 'flex';
+  success.classList.add('is-active');
   countStreak++;
 
   if (countStreak == 3) {
     badge(3);
-    setTimeout(() => (earnedBadge('bronze'), 2500));
+    setTimeout(() => {
+      earnedBadge('bronze');
+      bronze.classList.remove('is-active');
+    }, 250);
   } else if (countStreak == 10) {
     badge(5);
-    setTimeout(() => (earnedBadge('silver'), 2500));
+    setTimeout(() => {
+      earnedBadge('silver');
+      silver.classList.remove('is-active');
+    }, 250);
   } else if (countStreak == 15) {
     badge(10);
-    setTimeout(() => (earnedBadge('gold'), 2500));
+    setTimeout(() => {
+      earnedBadge('gold');
+      gold.classList.remove('is-active');
+    }, 250);
   }
-  setTimeout(() => (success.style.display = 'none'), 1000);
+  setTimeout(() => {
+    success.style.display = 'none';
+    success.classList.remove('is-active');
+  }, 1000);
 }
 
 function incorrect() {
   const incorrect = document.getElementById('incorrect');
   incorrect.style.display = 'flex';
+  incorrect.classList.add('is-active');
   countStreak = 0;
 
-  setTimeout(() => (incorrect.style.display = 'none'), 1000);
+  setTimeout(() => {
+    incorrect.style.display = 'none';
+    incorrect.classList.remove('is-active');
+  }, 1000);
 }
 
 function levelFinished() {
@@ -298,15 +322,25 @@ function earnedBadge(trophyType) {
   const bronze = document.getElementById('bronze-modal');
   const silver = document.getElementById('silver-modal');
   const gold = document.getElementById('gold-modal');
+  bronze.classList.add('is-active');
+  silver.classList.add('is-active');
+  gold.classList.add('is-active');
+
   if (trophyType == 'bronze') {
     bronze.style.display = 'flex';
-    setTimeout(() => (bronze.style.display = 'none'), 2500);
+    setTimeout(() => {
+      bronze.style.display = 'none';
+    }, 2500);
   } else if (trophyType == 'silver') {
     silver.style.display = 'flex';
-    setTimeout(() => (silver.style.display = 'none'), 2000);
+    setTimeout(() => {
+      silver.style.display = 'none';
+    }, 2000);
   } else if (trophyType == 'gold') {
     gold.style.display = 'flex';
-    setTimeout(() => (gold.style.display = 'none'), 2000);
+    setTimeout(() => {
+      gold.style.display = 'none';
+    }, 2000);
   }
 }
 // The badge system //
