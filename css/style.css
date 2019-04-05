@@ -279,7 +279,6 @@ a:hover {
   text-align: center;
   line-height: 10rem;
   color: #d1e8e2;
-  font-size: 2rem;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.9);
   text-transform: none;
@@ -479,6 +478,15 @@ a:hover {
   }
   .input-player-name-header {
     animation: typing 3.5s steps(50, end), cursor 1.75s step-end infinite;
+  }
+
+  .trophy-modal-content {
+    text-align: center;
+    line-height: 10rem;
+    color: #d1e8e2;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: none;
   }
 }
 
